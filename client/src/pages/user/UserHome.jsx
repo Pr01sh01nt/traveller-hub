@@ -34,7 +34,7 @@ const UserHome = () => {
                                 const fetchedImage = cldImagee.image( data.imageId[0]);  //taking only the first image
                                 console.log(fetchedImage,"i am fetching");
                    
-                                userData.push({myImg:fetchedImage, journeyPlace:data.placeOfJourney, description:data.description});
+                                userData.push({myImg:fetchedImage, userPost:data});
                             });
                             console.log(userData, "j");
                             
@@ -58,7 +58,7 @@ const UserHome = () => {
             <h3>My travels</h3>
         <div className={usercss.cards}>
                  
-        {journeyData.length!=0 && journeyData.map((data)=><Card key={data.myImg._id} description={data.description} journeyPlace={data.journeyPlace}><AdvancedImage alt="data" cldImg={data.myImg} height={500} width={500}/></Card>) }
+        {journeyData.length!=0 && journeyData.map((data)=><Card key={data.userPost._id} userPost={data.userPost}><AdvancedImage alt="data" cldImg={data.myImg} height={500} width={500}/></Card>) }
          
         </div>
 

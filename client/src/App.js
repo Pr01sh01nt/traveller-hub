@@ -13,6 +13,7 @@ import MyJourney from './pages/user/MyJourney';
 import Experiances from './pages/people/Experiance'
 import { UserPermission } from './UserPermission';
 import Post from './pages/people/Post'
+import EditPost from './pages/user/EditPost';
 
 function App() {
       const [test , setTest] = useState(0);
@@ -42,14 +43,14 @@ function App() {
        
             <Route  path="home" element={<UserHome />} />
             <Route exact  path="myjourney" element={<MyJourney />} />
+            <Route path = "editpost" element = {<EditPost/>} />
          
           </Route>
 
           <Route path="/people" element={<UserPermission pathValue={"people"}/>}>
             <Route  exact path="experiances" element={<Experiances />} />
                     <Route  path =   "experiance" >
-                    <Route  path =   ":handle" element = {<Post/>}/>
-                            
+                    <Route  path =   ":handle" element = {<Post/>}/>       
                       </Route>
               
           </Route>

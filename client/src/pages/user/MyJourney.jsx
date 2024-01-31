@@ -6,7 +6,7 @@ import journeycss from './User.module.css'
 axios.defaults.withCredentials = true;
 
 const MyJourney = () => {
-  const [journeyData, setJourneyData] = useState({ description: "" });
+  const [journeyData, setJourneyData] = useState({ description: "" , type:"public"});
   const [images, setImages] = useState([]);
 
 
@@ -24,14 +24,19 @@ const MyJourney = () => {
       setJourneyData({ ...journeyData, description: event.target.value });
     else if (event.target.name === "images") {
       const length = event.target.files.length;
+      console.log("I Length", event.target.files);
       let img = [];
 
-      img = Object.values(event.target.files);
-      console.log(img);
+      img = Object.values(event.target.files);  // returns array
+      console.log("I img", img);
       console.log(typeof (img));
       console.log(img);
       setImages(img);
 
+    }
+    else if(event.target.name === "typeOfPost")
+    {
+      setJourneyData({...journeyData, type:event.target.value});
     }
   }
 
@@ -55,11 +60,11 @@ const MyJourney = () => {
         imageId.push(res.data.public_id);
         console.log("imageId length/imgrid", imageId);
       }
-        console.log({...journeyData, imageId}, "i am journey");
+      console.log({ ...journeyData, imageId }, "i am journey");
 
 
       // saving to database
-      const res = await axios.post("http://localhost:3001/user/myjourney", {...journeyData, imageId});
+      const res = await axios.post("http://localhost:3001/user/myjourney", { ...journeyData, imageId });
       console.log(res.data);
 
     } catch (err) {
@@ -67,6 +72,7 @@ const MyJourney = () => {
     }
 
   }
+
 
   return (
     <>
@@ -76,31 +82,41 @@ const MyJourney = () => {
       <div className={journeycss.form}>
         <form onSubmit={handleSubmit}>
           <div className={journeycss.formContent}>
-            <label htmlFor='placeOfJourney'>Place of Journey: </label><input id="placeOfJourney" name="placeOfJourney" type="text" onChange={handleChange} required /></div>
+            <label htmlFor='placeOfJourney'>Place of Journey: </label><input id="placeOfJourney" name="placeOfJourney" type="text" onChange={handleChange} required />
+          </div>
 
           <div className={journeycss.formContent}>
             <label htmlFor='journeyImage'>Journey images : </label>
 
-            {images.length != 0 && 
-              images.map((image) => {
-                const path = URL.createObjectURL(image);
-                console.log(path);
-                return (
-                <>
-                <img key={image.size} src={path} alt="choosed images" height={50} width={50} />
+              {images.length != 0 &&
+                images.map((image) => {
+                  const path = URL.createObjectURL(image);
+                  console.log(path);
+                  return <img key={image.size} src={path} alt="choosed images" height={50} width={50} />})}
+  
+              <input id="journeyImage" type="file" name="images" accept=".jpg, .jpeg, .png" onChange={handleChange} multiple /> 
+            </div>
              
-                </>
-                
-                )})}
-            
-            
-            <input id="journeyImage" type="file" name="images" accept=".jpg, .jpeg, .png" onChange={handleChange} multiple /> </div>
+
 
           <div className={journeycss.formContent}>
-            <label htmlFor='description'>Description : </label><textarea id="description" name="description" value={journeyData.description} onChange={handleChange} required /></div>
+            <label htmlFor='description'>Description : </label><textarea id="description" name="description" value={journeyData.description} onChange={handleChange} required />
+          </div>
+
+         
+          <div className={journeycss.formContent}>
+            Select type of Post : 
+            <div>
+
+            <input type = "radio" id = "private" name = "typeOfPost" value = "private" onChange={handleChange} required/><label htmlFor= "private">Private</label>
+            <input type = "radio" id = "public" name = "typeOfPost" value = "public" onChange={handleChange}/><label htmlFor="public" >Public</label>
+            </div>
+          </div>
 
           <div className={journeycss.formContent}>
-            <button type="submit">Save Journey</button></div>
+            <button type="submit">Save Journey</button>
+          </div>
+
         </form>
       </div>
 

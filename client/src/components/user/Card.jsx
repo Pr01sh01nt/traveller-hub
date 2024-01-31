@@ -1,20 +1,29 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import usercss from './User.module.css'
 
 
-const Card = (props) => {
+const Card = ({children, userPost}) => {
+  const navigate = useNavigate();
+
+  const handleClick = ()=>{
+     navigate(`/user/editpost`, {
+      state : userPost
+     })
+  }
+
   return (
     <>
       
-        <div className={usercss.card}>
+        <div className={usercss.card} onClick = {handleClick}>
           <div className={usercss.cardImg}>
 
-            {props.children}
+            {children}
           </div>
             <div className={usercss.cardContent}>
             <hr/>
-              <h3>{props.journeyPlace}</h3>
-                {props.description}
+              <h3>{userPost.placeOfJourney}</h3>
+                {userPost.description}
             </div>
         </div> 
                     

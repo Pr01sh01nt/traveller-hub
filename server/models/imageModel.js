@@ -5,6 +5,7 @@ const imageModel = new Schema({
     placeOfJourney : {type: String, required : true},
     description : {type: String, required: true},
     imageId : {type: [String], required : true},
+    type   : {type : String , required : true},
     userId   : {type : Schema.Types.ObjectId, required : true, ref: 'travelUsers'}
 });
 
