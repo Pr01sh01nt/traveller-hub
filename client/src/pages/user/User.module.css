@@ -1,0 +1,58 @@
+.heading{
+    text-align: center;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    min-height: 50vh;
+    align-items: center;
+}
+
+.save, .view{
+    border: 94% 86% 45% 57% / 26% 20% 65% 23% ;
+    background: rgba( 159, 242, 59, 0.35 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 15.5px );
+    -webkit-backdrop-filter: blur( 15.5px );
+    border-radius: 10px;
+    min-height: 3em;
+    height: fit-content;
+    /* border: 1px solid rgba( 255, 255, 255, 0.18 ); */
+}
+
+.cards{
+    display: flex;
+    
+    min-width: 40vw;
+    min-height: 60vh;
+
+    overflow: auto;
+    border-top : dashed blueviolet 4px ;
+    border-bottom : dashed blueviolet 4px ;
+
+    
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+.formContent{
+    display: flex;
+    flex-direction: column;
+    margin: 5vh 0;
+    font-size: x-large;
+    justify-content: space-evenly;
+    height:  fit-content;
+   
+}
+
+input{
+    min-height: 1.8em;
+    padding-bottom: 0;
+    
+}

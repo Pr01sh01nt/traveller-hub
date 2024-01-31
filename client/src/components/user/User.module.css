@@ -1,0 +1,29 @@
+
+.card{
+    display: flex;
+    flex-direction: column;
+    min-width: 40vw;
+    min-height: 10vh;
+    justify-content: center;
+    
+    margin: 0.5em 2em;
+    border: dashed black 1px;
+    border-radius: 1em ;
+
+}
+
+.cardContent{
+
+    overflow: hidden;
+    min-width: 40vw;
+    width: fit-content;
+
+}
+
+.cardImg{
+    width: fit-content;
+    height: fit-content;
+    width: 40vw;
+    
+
+}
