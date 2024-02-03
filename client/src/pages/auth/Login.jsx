@@ -1,10 +1,9 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import logcss from './Auth.module.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-
 
 export const Login = () => {
   const [userData, setData] = useState({});
@@ -16,7 +15,7 @@ export const Login = () => {
 
     console.log(userData);
 
-    try{
+    try{ 
       const response = await axios.post("http://localhost:3001/auth/login", userData);
       console.log(response);
       setCookie("accesstoken", response.data.accesstoken);

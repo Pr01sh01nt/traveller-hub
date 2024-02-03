@@ -15,7 +15,7 @@ const SideBar = ({currState}) => {
   const logout = ()=>{
     console.log("logout");
     removeCokkie("accesstoken",{ path: '/' }); 
-    setHasLogin(2);
+    setHasLogin(0);
     navigate('/');
   }
 

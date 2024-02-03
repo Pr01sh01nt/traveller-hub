@@ -8,7 +8,7 @@ export const UserPermission = ({pathValue}) => {
     const {hasLogin, setHasLogin} = useContext(MyContext);
   
 
-
+    console.log(hasLogin, "hasLogin rendered from userPermission");
     useEffect(() => {
 
         const check = async () => {
@@ -30,6 +30,9 @@ export const UserPermission = ({pathValue}) => {
                 setHasLogin(2);
                 console.log('hi');
                 console.log(e);
+                setTimeout(()=>{
+                    setHasLogin(0);
+                },1000);
             }
         }
 
@@ -41,7 +44,7 @@ export const UserPermission = ({pathValue}) => {
     return (
         <>
 
-            {hasLogin ? (hasLogin === 1 ? <Outlet /> : <Navigate to="/auth/login" />) : <h1>Loading.......</h1>}
+            {hasLogin!==0 ? (hasLogin === 1 ? <Outlet /> : <Navigate to="/auth/login" />) : <h1>Loading.......</h1>}
         </>
 
 

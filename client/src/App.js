@@ -14,6 +14,9 @@ import Experiances from './pages/people/Experiance'
 import { UserPermission } from './UserPermission';
 import Post from './pages/people/Post'
 import EditPost from './pages/user/EditPost';
+import axios from 'axios';
+
+
 
 function App() {
       const [test , setTest] = useState(0);

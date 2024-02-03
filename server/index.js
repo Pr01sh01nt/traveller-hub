@@ -3,7 +3,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/auth.js');
 const cors = require('cors');
-const authorization = require('./middlewares/authorization.js');
+const authorization = require('./middlewares/authorization.middleware.js');
 const userRouter = require('./routes/user.js');
 const peopleRouter = require('./routes/people.js');
 const main = require('./config/db.js').main;
@@ -22,6 +22,10 @@ app.use(cookieParser());
 
 main().catch((err) => { console.log(err); })
 
+
+app.post('/', (req,res)=>{
+    res.json(req.body);
+})
 
 
 app.use('/auth', authRouter);

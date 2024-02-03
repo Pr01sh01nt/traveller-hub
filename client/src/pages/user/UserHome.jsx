@@ -31,10 +31,10 @@ const UserHome = () => {
                             let  userData = [];
                             response.map((data)=>{
                                 console.log(data ,"dataa");
-                                const fetchedImage = cldImagee.image( data.imageId[0]);  //taking only the first image
-                                console.log(fetchedImage,"i am fetching");
+                                console.log(data.imageId[0],"i am fetching");//taking only the first image
+   
                    
-                                userData.push({myImg:fetchedImage, userPost:data});
+                                userData.push({myImg:data.imageId[0], userPost:data});
                             });
                             console.log(userData, "j");
                             
@@ -58,7 +58,7 @@ const UserHome = () => {
             <h3>My travels</h3>
         <div className={usercss.cards}>
                  
-        {journeyData.length!=0 && journeyData.map((data)=><Card key={data.userPost._id} userPost={data.userPost}><AdvancedImage alt="data" cldImg={data.myImg} height={500} width={500}/></Card>) }
+        {journeyData.length!=0 && journeyData.map((data)=><Card key={data.userPost._id} userPost={data.userPost}><AdvancedImage className={usercss.img} alt="data" cldImg={cldImagee.image(data.myImg)} height={500} width={500}/></Card>) }
          
         </div>
 

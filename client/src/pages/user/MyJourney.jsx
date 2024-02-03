@@ -6,8 +6,8 @@ import journeycss from './User.module.css'
 axios.defaults.withCredentials = true;
 
 const MyJourney = () => {
-  const [journeyData, setJourneyData] = useState({ description: "" , type:"public"});
-  const [images, setImages] = useState([]);
+  const [journeyData, setJourneyData] = useState({  placeOfJourney:"", description: "" , type:"public", images:[]});
+  
 
 
   console.log("render of textarea");
@@ -31,8 +31,11 @@ const MyJourney = () => {
       console.log("I img", img);
       console.log(typeof (img));
       console.log(img);
-      setImages(img);
 
+      
+      setJourneyData({...journeyData, images: img});
+      
+     
     }
     else if(event.target.name === "typeOfPost")
     {
@@ -45,26 +48,20 @@ const MyJourney = () => {
 
 
     try {
-      // upoloading images
-      let imageId = [];
-      for (let i = 0; i < images.length; i++) {
-        const formData = new FormData();
-        formData.append("file", images[i]);
-        formData.append("upload_preset", "kl5e3smj");
-        console.log(images[i]);
-        const res = await axios.post("https://api.cloudinary.com/v1_1/dpsjn9leb/image/upload", formData, { withCredentials: false });
-
-        //if the cloudinary server sends the bad request then uploaded images should be deleted
-        console.log(res.data);
-        console.log(res.data.public_id);
-        imageId.push(res.data.public_id);
-        console.log("imageId length/imgrid", imageId);
+      
+      const formData = new FormData();
+      for(const key in journeyData)
+      {
+        console.log(key, journeyData[key]);
+        if(key !== "images")
+        formData.append(key, journeyData[key]);
+        else journeyData[key].map((image)=>{formData.append(key, image);});
+        
       }
-      console.log({ ...journeyData, imageId }, "i am journey");
-
-
-      // saving to database
-      const res = await axios.post("http://localhost:3001/user/myjourney", { ...journeyData, imageId });
+     
+     
+      console.log('saving...');
+      const res = await axios.post("http://localhost:3001/user/myjourney", formData);
       console.log(res.data);
 
     } catch (err) {
@@ -77,22 +74,18 @@ const MyJourney = () => {
   return (
     <>
       <h1>
-        Write your current travel Expreinces
+        Write your travel Expreinces
       </h1>
       <div className={journeycss.form}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}  >
           <div className={journeycss.formContent}>
-            <label htmlFor='placeOfJourney'>Place of Journey: </label><input id="placeOfJourney" name="placeOfJourney" type="text" onChange={handleChange} required />
+            <label htmlFor='placeOfJourney'>Place of Journey: </label><input id="placeOfJourney" name="placeOfJourney" type="text" onChange={handleChange}  value={journeyData.placeOfJourney}  required />
           </div>
 
           <div className={journeycss.formContent}>
-            <label htmlFor='journeyImage'>Journey images : </label>
+            <label htmlFor='journeyImage'>Add Journey images : </label>
 
-              {images.length != 0 &&
-                images.map((image) => {
-                  const path = URL.createObjectURL(image);
-                  console.log(path);
-                  return <img key={image.size} src={path} alt="choosed images" height={50} width={50} />})}
+              {journeyData.images.map((image) =><img key={image.size} src={URL.createObjectURL(image)} alt="choosed images" height={50} width={50} />)}
   
               <input id="journeyImage" type="file" name="images" accept=".jpg, .jpeg, .png" onChange={handleChange} multiple /> 
             </div>
@@ -108,8 +101,8 @@ const MyJourney = () => {
             Select type of Post : 
             <div>
 
-            <input type = "radio" id = "private" name = "typeOfPost" value = "private" onChange={handleChange} required/><label htmlFor= "private">Private</label>
-            <input type = "radio" id = "public" name = "typeOfPost" value = "public" onChange={handleChange}/><label htmlFor="public" >Public</label>
+            <input type = "radio" id = "private" name = "typeOfPost" value = "private" checked = {journeyData.type==="private"} onChange={handleChange} required/><label htmlFor= "private">Private</label>
+            <input type = "radio" id = "public" name = "typeOfPost" value = "public" checked = {journeyData.type==="public"} onChange={handleChange}/><label htmlFor="public" >Public</label>
             </div>
           </div>
 

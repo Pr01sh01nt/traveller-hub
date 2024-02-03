@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useMemo, memo } from 'react'
 import SearchList from './SearchList'
 import { searchData } from '../../pages/people/searchData'
 
@@ -33,6 +33,6 @@ const SearchBar = ({getSearch}) => {
             </div>
         </>
     )
-}
+}   
 
 export default SearchBar
