@@ -1,9 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 const Home = () => {
+  const [text, setText] = useState("a");
+
+  setTimeout(()=>{
+
+    
+  },1000)
+
   return (
     <>
       <h1>
+        {text}
         Welcome to VoyageLink!
       </h1>
       <div>

@@ -16,7 +16,7 @@ router.use('*', (req, res, next)=>{
         req.userId = verifiction.token;  
         req.body.userId = verifiction.token;  
         
-        console.log(req.body); 
+        console.log(req.body,"from auth middlewhere"); 
         next();
 
 

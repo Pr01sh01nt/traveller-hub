@@ -38,11 +38,12 @@ const PostList = ({post}) => {
     
     <div style={css} onClick={handleClick} className={post.imageId[0]}>
         
-        <AdvancedImage alt="data" cldImg={ image} height={100} width={100}/>
+        <AdvancedImage alt="data" cldImg={image} height={100} width={100}/>
         
         <div>{post.placeOfJourney}</div> 
         <div>{post.description}</div> 
     </div>
+    
    
 </>
   )

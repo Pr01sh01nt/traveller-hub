@@ -1,6 +1,5 @@
 /node_modules
-
-.json
+/node_modules
 
 .env.local
 .env.development.local

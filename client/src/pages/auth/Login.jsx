@@ -10,6 +10,8 @@ export const Login = () => {
   const [_, setCookie] = useCookies(["accesstoken"]);
   const navigate = useNavigate();
 
+  console.log(userData, "from login");
+
   const handleSubmit = async(event) => {
     event.preventDefault();
 
@@ -18,7 +20,7 @@ export const Login = () => {
     try{ 
       const response = await axios.post("http://localhost:3001/auth/login", userData);
       console.log(response);
-      setCookie("accesstoken", response.data.accesstoken);
+      setCookie("accesstoken", response.data.accesstoken, {path:'/'});
 
       if(response.data.accesstoken)
       {

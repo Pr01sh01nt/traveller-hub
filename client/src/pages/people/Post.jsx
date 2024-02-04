@@ -8,13 +8,15 @@ import {
   accessibility,
   placeholder
 } from "@cloudinary/react";
+import Comment from '../../components/people/Comment';
 
-const Post = ({state}) => {
+
+const Post = () => {
     const location = useLocation();
     console.log(location);
     console.log(location.state);
 
-  console.log(state, 'i am posst');
+  console.log( 'i am posst');
   
 const cldImage = new Cloudinary({ cloud:{ cloudName: "dpsjn9leb" }});
 
@@ -30,6 +32,7 @@ const cldImage = new Cloudinary({ cloud:{ cloudName: "dpsjn9leb" }});
                 
         </div>
         {/* comment section */}
+        <Comment postId={location.state._id} username={location.state.userId}/>
         
     </>
   )

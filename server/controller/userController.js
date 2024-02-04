@@ -4,7 +4,7 @@ const cloudinary = require('../utils/cloudinary');
 exports.userHome  = async(req,res)=>{
     
     try{
-        const images = await imageModel.find({userId : req.body.userId},{userId:0});
+        const images = await imageModel.find({userId : req.body.userId});
         console.log(images);
         res.status(200).json(images);
         

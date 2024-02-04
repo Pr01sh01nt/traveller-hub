@@ -9,12 +9,12 @@ import { useNavigate } from 'react-router-dom'
 
 const SideBar = ({currState}) => {
   const {hasLogin,setHasLogin} = useContext(MyContext);
-  const [_,removeCokkie] = useCookies(["accesstoken"]);
+  const [cookie, setCookie,removeCokkie] = useCookies(["accesstoken"]);
   const navigate = useNavigate();
 
   const logout = ()=>{
     console.log("logout");
-    removeCokkie("accesstoken",{ path: '/' }); 
+    removeCokkie("accesstoken", { path: '/' }); 
     setHasLogin(0);
     navigate('/');
   }

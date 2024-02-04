@@ -31,19 +31,21 @@ exports.login = async (req, res, next) => {
 
     try {
         const { username, password } = req.body;
-        const checkUsername = await travelUsers.findOne({ username });
-        if (!checkUsername)
+        const userData = await travelUsers.findOne({ username });
+        if (!userData)
             throw new Error("User does not exists");
 
-        const checkPassword = await bcrypt.compare(password, checkUsername.password);
+        const checkPassword = await bcrypt.compare(password, userData.password);
         if (!checkPassword)
             throw new Error("Password does not match");
 
-        const token = jwt.sign({ token: checkUsername._id }, "@ec%r*i4)V");
+        console.log(userData);
+
+        const token = jwt.sign({ token: userData.username }, "@ec%r*i4)V");
 
         res.cookie("accesstoken", token, {
-            httpOnly: true,
             maxAge : 60*60,
+            secure : true,
         }); 
 
         // res.redirect(201, "/user/home");
