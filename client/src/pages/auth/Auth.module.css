@@ -1,6 +1,6 @@
 
 input{
-    margin: 2px;
+    /* margin: 2px; */
     border:none;
     border-bottom: solid black 1px;
 }
@@ -8,7 +8,7 @@ input{
 
 .form{
     display: flex;
-    border: solid black 1px;
+    /* border: solid black 1px; */
     flex-direction: row-reverse;
     background-image: url('../../../public/1.jpg');
     
@@ -17,7 +17,7 @@ input{
     background-position: center;
     /* align-items: center; */
     /* width:50vw; */
-    height: 90vh;
+    height : 90vh;
     color: white;
     
     
@@ -33,7 +33,7 @@ input{
 .fieldset{
     margin: 0px 0px ;
     display: flex;
-    opacity:  0;
+    /* opacity:  0; */
     flex-direction: column;
     /* border:none;  */
     /* align-content: stretch; */
@@ -42,7 +42,7 @@ input{
     height: 85.7vh;
     width: 40vw;
     border-radius: 100% 0% 0% 100% / 49% 0% 100% 51% ;
-    animation: formAnim 0.5s forwards ease-in;
+    /* animation: formAnim 0.5s forwards ease-in; */
     /* transition: visibility 5s ease-in; */
     
     backdrop-filter: blur(2px);
@@ -76,18 +76,18 @@ input{
     display: flex;
     flex-direction: column;
     width:30vw;
-    margin: 1vh 0px;
+    /* margin: 1vh 0px; */
 }
 
 
 
-input{
+/* input{
     background: transparent;
-}
+} */
 
 .button{
-    max-width: 20vw;
-    overflow: auto;
+    /* max-width: 20vw; */
+    /* overflow: auto; */
     align-self: center;    
 }
 

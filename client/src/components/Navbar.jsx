@@ -4,23 +4,29 @@ import { Link } from 'react-router-dom'
 import SideBar from './SideBar'
 import { useState, useRef, useContext } from 'react'
 import { MyContext } from '../context/MyContext'
-import {Box, Button} from '@mui/material' 
+import {Box, Button, Avatar, Menu, MenuItem} from '@mui/material' 
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 export const Navbar = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
-  const [path, setPath] = useState("M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z");
-  const [isOpened, setIsOpened] = useState(false);
+ 
+  const [sideBarIsOpened, setIsOpened] = useState(false);
   const {hasLogin,setHasLogin} = useContext(MyContext);
 
   const handleClick = () => {
-    setIsOpened(!isOpened);
-    if (isOpened)
-    setPath("M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z");
-  else
-  setPath("m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z");
-
+    setIsOpened(!sideBarIsOpened);
+  
   }
 
+  const handleAvatarClick = (event)=>{
+      setAnchorEl(event.currentTarget);
+  }
+  const handleAvatarClose = () => {
+    setAnchorEl(null);
+  };
  
 
   return (
@@ -29,18 +35,33 @@ export const Navbar = () => {
 
       <Box  component = "div"  className={appcss.navbar}>
         <Box component = "div" onClick={handleClick} >
-          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-            <path d={path} />
-          </svg>
+           {sideBarIsOpened ?  <CloseIcon fontSize="large"/> :   <MenuIcon fontSize="large"/>}
+          
+           
         </Box>
         <img alt="img" src='/fav2.pn' />
-        {hasLogin===1? <Link to="#"><Button  variant = "contained" >Profile</Button></Link> : <Link to="/auth/register"><Button variant = "contained" >CONNECT JOURNEY</Button></Link>}
+        {hasLogin===1? <>
+        
+          <Avatar sx={{ width: 56, height: 56 }} onClick = {handleAvatarClick}>P</Avatar>
+         <Menu 
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleAvatarClose}
+         >
+          
+          
+          <MenuItem onClick={handleAvatarClose}>Profile</MenuItem>
+        <MenuItem onClick={handleAvatarClose}>My account</MenuItem>
+        <MenuItem onClick={handleAvatarClose}>Logout</MenuItem>
+          
+          
+          </Menu> </>: <Link to="/auth/register" style={{ textDecoration: 'none' }}><Button variant = "contained">CONNECT JOURNEY</Button></Link>}
      
 
       </Box> 
-
+          
    
-      {isOpened && <SideBar />}
+      {sideBarIsOpened && <SideBar />}
 
     </>
   )

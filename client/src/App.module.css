@@ -19,10 +19,10 @@ img{
     
     margin: 0px 0px;
     padding: 1.25em 0.1em 1.25em 0.625em;
-    min-width: 98.65vw;
-    min-height: 5vh;
-    height: auto;
-    width:fit-content;
+    /* min-width: 98.65vw; */
+    /* min-height: 5vh; */
+    /* height: auto; */
+    /* width:fit-content; */
     position: sticky;
     top: 0px;
 }

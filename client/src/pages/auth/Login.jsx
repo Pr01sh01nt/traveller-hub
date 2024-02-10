@@ -4,6 +4,9 @@ import logcss from './Auth.module.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
+import {Box, Button, TextField} from '@mui/material' 
+import { StyledEngineProvider } from '@mui/material/styles';
+
 
 export const Login = () => {
   const [userData, setData] = useState({});
@@ -38,28 +41,29 @@ export const Login = () => {
   return (
     <>
     
-    
-    <div className={`${logcss.form} ${logcss.loginForm}`}> 
+    <StyledEngineProvider injectFirst>
+    <Box component="div" className={`${logcss.form} ${logcss.loginForm}`}> 
         
-        <form onSubmit={handleSubmit}>
-          <fieldset className={`${logcss.fieldset} ${logcss.loginField}`}>
-            <div className={logcss.content}>
-              <label htmlFor="username">Username<span aria-label="required">*</span>:</label> <input id="username" type="text" required onChange={(e) => { setData({ ...userData, username: e.target.value }) }} />
-            </div>
+        <Box component= "form" onSubmit={handleSubmit}>
+          <Box component= "fieldset" className={`${logcss.fieldset} ${logcss.loginField}`}>
+            <Box component="div" className={logcss.content}>
+              <TextField margin = "dense" variant= "filled" label = "Username"  type="text" required onChange={(e) => { setData({ ...userData, username: e.target.value }) }} />
+            </Box>
 
-            <div className={logcss.content}>
-              <label htmlFor="password">Password<span aria-label="required">*</span>:</label> <input id="password" type="password" required onChange={(e) => { setData({ ...userData, password: e.target.value }) }} />
-            </div>
+            <Box component="div" className={logcss.content}>
+               <TextField margin = "dense" variant= "filled" label = "Password"  type="password" required onChange={(e) => { setData({ ...userData, password: e.target.value }) }} />
+            </Box>
 
             
 
-            <div className={logcss.content}>
-              <button className={logcss.button}>LogIn</button>
-            </div>
+            <Box component="div" className={logcss.content}>
+              <Button variant= "contained" className={logcss.button}  type = "submit">LogIn</Button>
+            </Box>
 
-          </fieldset>
-        </form>
-      </div>
+          </Box >
+        </Box>
+      </Box>
+      </StyledEngineProvider>
 
     
     </>

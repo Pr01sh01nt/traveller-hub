@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Children } from 'react'
 import usercss from './User.module.css'
-import Card from '../../components/user/Card'
+import Cards from '../../components/user/Cards'
 import { Link, Outlet } from 'react-router-dom';
 import { Cloudinary} from "@cloudinary/url-gen";
 import {
@@ -12,6 +12,9 @@ import {
 } from "@cloudinary/react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import {Box, Button, TextField, Typography} from '@mui/material';
+import { StyledEngineProvider } from '@mui/material/styles';
+
 
 
 
@@ -45,28 +48,32 @@ const UserHome = () => {
 
 
     } , []);
-
-
+ 
   return (
     <>
-        <h1 className={usercss.heading}>
+    
+              
+    <StyledEngineProvider injectFirst>
+        <Typography variant = "h2" className={usercss.heading}>
             Save your Memories
-        </h1> 
-        <div className={usercss.btn}>
-            <Link to="/user/myjourney"><button className={usercss.save}>SAVE JOURNEY</button></Link>
-        </div>
+        </Typography> 
+        
+        
+        <Box component= "div" className={usercss.btn}>
+            <Link to="/user/myjourney"><Button variant= "contained" className={usercss.save}>ADD JOURNEY</Button></Link>
+        </Box>
 
-            <h3>My travels</h3>
-        <div className={usercss.cards}>
+            <Typography variant= "h4">My travels</Typography>
+        <Box component= "div" className={usercss.cards}>
                  
-        {journeyData.length!=0 && journeyData.map((data)=><Card key={data.userPost._id} userPost={data.userPost}><AdvancedImage className={usercss.img} alt="data" cldImg={cldImagee.image(data.myImg)} height={500} width={500}/></Card>) }
+        {journeyData.length!=0 && journeyData.map((data)=><Cards key={data.userPost._id} userPost={data.userPost}><AdvancedImage className={usercss.img} alt="data" cldImg={cldImagee.image(data.myImg)} height={50} width={50}/></Cards>) }
          
-        </div>
+        </Box>
 
-        <div className={usercss.btn}>
-            <Link to ="/people/experiances"><button className={usercss.view}> View other Expreinces</button></Link>
-        </div>
-      
+        <Box component= "div" className={usercss.btn}>
+            <Link to ="/people/experiances"><Button variant= "contained" className={usercss.view}> View other Expreinces</Button></Link>
+        </Box>
+      </StyledEngineProvider>
     </>
   )
 }
