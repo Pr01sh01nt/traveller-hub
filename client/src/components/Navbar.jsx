@@ -3,8 +3,8 @@ import appcss from '../App.module.css'
 import { Link } from 'react-router-dom'
 import SideBar from './SideBar'
 import { useState, useRef, useContext } from 'react'
-import { motion } from 'framer-motion'
 import { MyContext } from '../context/MyContext'
+import {Box, Button} from '@mui/material' 
 
 export const Navbar = () => {
 
@@ -27,17 +27,17 @@ export const Navbar = () => {
   
     <>
 
-      <div className={appcss.navbar}>
-        <span onClick={handleClick} >
+      <Box  component = "div"  className={appcss.navbar}>
+        <Box component = "div" onClick={handleClick} >
           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
             <path d={path} />
           </svg>
-        </span>
+        </Box>
         <img alt="img" src='/fav2.pn' />
-        {hasLogin===1? <Link to="#"><button >Profile</button></Link> : <Link to="/auth/register"><button >CONNECT JOURNEY</button></Link>}
+        {hasLogin===1? <Link to="#"><Button  variant = "contained" >Profile</Button></Link> : <Link to="/auth/register"><Button variant = "contained" >CONNECT JOURNEY</Button></Link>}
      
 
-      </div>
+      </Box> 
 
    
       {isOpened && <SideBar />}

@@ -18,6 +18,7 @@ import axios from 'axios';
 
 const cldImagee = new Cloudinary({ cloud:{ cloudName: "dpsjn9leb" }});
 // const myImg = cldImagee.image("hvixjsawv1ad5e4opsle");
+console.log("userhome rendered");
 
 const UserHome = () => {
   

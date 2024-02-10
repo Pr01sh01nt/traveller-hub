@@ -5,6 +5,7 @@ import { useState, useRef, useContext } from 'react'
 import { MyContext } from '../context/MyContext'
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
+import {Box} from '@mui/material' 
     
 
 const SideBar = ({currState}) => {
@@ -15,28 +16,28 @@ const SideBar = ({currState}) => {
   const logout = ()=>{
     console.log("logout");
     removeCokkie("accesstoken", { path: '/' }); 
-    setHasLogin(0);
+    setHasLogin(2);
     navigate('/');
   }
 
 
   return (
     <>
-      <div className={appcss.sideBar}>
+      <Box  component = "div" className={appcss.sideBar}>
     {hasLogin===1 ? (<>
-      <Link to="/user/home"  style={{ textDecoration: 'none' }}><div className={appcss.sideBarElement}>Home</div></Link>
+      <Link to="/user/home"  style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement}>Home</Box></Link>
     </>):(<>
-    <Link to="/"  style={{ textDecoration: 'none' }}><div className={appcss.sideBarElement}>Home</div></Link> 
+    <Link to="/"  style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement}>Home</Box></Link> 
     </>)}
     
 
     
-    <Link to="/about" style={{ textDecoration: 'none' }}><div className={appcss.sideBarElement}>About</div></Link>
-    <Link to="/contacts" style={{ textDecoration: 'none' }}><div className={appcss.sideBarElement}>Contacts</div></Link>
+    <Link to="/about" style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement}>About</Box></Link>
+    <Link to="/contacts" style={{ textDecoration: 'none' }}><Box  component = "div"className={appcss.sideBarElement}>Contacts</Box></Link>
 
-    {hasLogin===1&& <div className={appcss.sideBarElement} onClick={logout}>Logout</div>}
+    {hasLogin===1&& <Box  component = "div"className={appcss.sideBarElement} onClick={logout}>Logout</Box>}
 
-    </div>
+    </Box>
      
     </>
   )

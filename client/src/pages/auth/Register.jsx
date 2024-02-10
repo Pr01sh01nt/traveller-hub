@@ -4,6 +4,7 @@ import regcss from './Auth.module.css'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 
+
 export const Register = () => {
   const [userData, setData] = useState({});
   const navigate = useNavigate();

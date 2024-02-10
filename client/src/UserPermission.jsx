@@ -1,16 +1,19 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Outlet, Route, Routes, Navigate, redirect, useNavigate } from 'react-router-dom'
+import { Outlet, Route, Routes, Navigate, redirect, useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { MyContext } from './context/MyContext';
+import Home from './pages/Home';
 
 export const UserPermission = ({pathValue}) => {
     // const [hasLogin, setHasLogin] = useState(0);
-    const {hasLogin, setHasLogin} = useContext(MyContext);
   
+    const location = useLocation(); 
+    const {hasLogin, setHasLogin} = useContext(MyContext);
+    console.log(location.pathname);
 
     console.log(hasLogin, "hasLogin rendered from userPermission");
     useEffect(() => {
-
+            console.log("userpermissoin");
         const check = async () => {
             try {
                 const result = await axios.get(`http://localhost:3001/${pathValue}`, { withCredentials: true })
@@ -30,21 +33,21 @@ export const UserPermission = ({pathValue}) => {
                 setHasLogin(2);
                 console.log('hi');
                 console.log(e);
-                setTimeout(()=>{
-                    setHasLogin(0);
-                },1000);
+              
             }
         }
 
         check();
         
     }, [])
-
+    console.log(<Outlet/>, "outlet");
+    
 
     return (
         <>
 
-            {hasLogin!==0 ? (hasLogin === 1 ? <Outlet /> : <Navigate to="/auth/login" />) : <h1>Loading.......</h1>}
+            {/* {hasLogin!==0 ? (hasLogin === 1 ? <>{console.log("child rendered")}<Outlet/></> : (<>{navigate("/", {replace : true})}<Home /></>)) : <h1>Loading.......</h1>} */}
+            {hasLogin!==0 ? (hasLogin === 1 ? <>{console.log("child rendered")}<Outlet/></> : <NotLogin/> ) : <h1>Loading.......</h1>}
         </>
 
 
@@ -57,3 +60,12 @@ export const UserPermission = ({pathValue}) => {
 }
 
 
+export const NotLogin = ()=>{
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        navigate("/", {replace : true});
+    },[]);
+
+    return <Home/>
+}

@@ -6,6 +6,7 @@ const router = express.Router();
 
   
 router.use('*', (req, res, next)=>{
+    console.log(req.originalUrl);
 
     try{
         const cookie = req.cookies[process.env.AUTH_COOKIE];

@@ -32,7 +32,11 @@ app.use('/auth', authRouter);
 
 app.use('/user', authorization, userRouter);
 
-app.use('/people', authorization, peopleRouter)
+app.use('/people', authorization, peopleRouter);
+
+app.use("", authorization, (req,res)=>{
+    res.status(200).json("");
+})
 
 
 app.listen(process.env.PORT, () => { console.log(`server is running on ${process.env.PORT}`) });
