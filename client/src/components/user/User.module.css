@@ -1,13 +1,14 @@
 
 .card{
-    display: inline-block;
-    flex-direction: column;
-    /* min-width: 40vw;
-    min-height: 10vh; */
-    justify-content: center;
+    /* display: inline-block; */
+/*   
+    width: 50vmax;
+    height: auto;
+    max-height: 50vmax;
+
     
     margin: 0.5em 2em;
-    box-shadow: 2px 2px 20px;
+    box-shadow: 2px 2px 20px; */
     /* border: dashed black 1px; */
     /* border-radius: 1em ; */
 
@@ -16,15 +17,20 @@
 .cardContent{
 
     /* overflow: hidden; */
-    /* min-width: 40vw; */
+    /* max-height: 10vmax; */
+    /* min-width: 10vw; */
     /* width: fit-content; */
 
 }
 
-.cardImg{
-    /* width: fit-content;
-    height: fit-content; */
-    /* width: 40vw; */
+.cardActionArea{
+    
+    /* width: 100%; */
+    /* height: fit-content; */
+    /* border : solid black 3px;Ṭ */
+    /* display: flex; */
+    /* flex-direction: column; */
+
     
 
 }

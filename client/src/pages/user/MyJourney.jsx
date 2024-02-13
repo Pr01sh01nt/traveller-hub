@@ -3,7 +3,7 @@ import axios from 'axios';
 import journeycss from './User.module.css'
 import { Box, Button, TextField, Typography, ImageList, ImageListItem, FormControl, FormLabel, FormControlLabel, RadioGroup, Radio } from '@mui/material';
 import { StyledEngineProvider } from '@mui/material/styles';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { styled } from '@mui/material/styles';
 
 
@@ -86,27 +86,24 @@ const MyJourney = () => {
 
   return (
     <>
+    <StyledEngineProvider injectFirst>
       <Typography variant="h3">
         Write your travel Expreinces
       </Typography>
       <Box component="div" className={journeycss.form}>
         <Box component="form" onSubmit={handleSubmit}  >
+       
           <Box component="div" className={journeycss.formContent}>
-            <label htmlFor='placeOfJourney'>Place of Journey: </label><TextField variant="filled" id="placeOfJourney" name="placeOfJourney" type="text" onChange={handleChange} value={journeyData.placeOfJourney} required />
+            <label htmlFor='placeOfJourney'>Place of Journey: </label><TextField className= {journeycss.input} variant="filled" id="placeOfJourney" name="placeOfJourney" type="text" onChange={handleChange} value={journeyData.placeOfJourney} required />
           </Box>
 
           <Box component="div" className={journeycss.formContent}>
             <label htmlFor='journeyImage'>Add Journey images : </label>
 
-            <Box component="div" sx={{  width: 250, height: 200,overflowY: 'scroll' }}>
+            <Box component="div" sx={{ maxWidth: 250, maxHeight: 200, overflowY: 'auto' }} className={journeycss.imageList}>
 
-              <ImageList
-
-                variant="masonry" gap={8}
-              >
-
+              <ImageList variant="masonry" gap={8}>
                 {journeyData.images.map((image) =>
-
                   <ImageListItem key={image.size}>
                     {console.log(image)}
                     <img src={URL.createObjectURL(image)} alt="choosed images" />
@@ -118,8 +115,8 @@ const MyJourney = () => {
 
 
 
-            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-              Upload Images
+            <Button component="label" variant="contained" startIcon={<AddAPhotoIcon />}>
+              Add Images
               <VisuallyHiddenInput type="file" multiple name="images" accept=".jpg, .jpeg, .png" onChange={handleChange} />
             </Button>
 
@@ -130,17 +127,13 @@ const MyJourney = () => {
 
 
           <Box component="div" className={journeycss.formContent}>
-            <label htmlFor='description'>Description : </label><TextField variant="filled" multiline id="description" name="description" value={journeyData.description} onChange={handleChange} required />
+            <label htmlFor='description'>Description : </label><TextField className= {journeycss.input} variant="filled" multiline id="description" name="description" value={journeyData.description} onChange={handleChange} required />
           </Box>
 
 
           <Box component="div" className={journeycss.formContent}>
             Select type of Post :
-            <RadioGroup
-              name="typeOfPost"
-              value={journeyData.type}
-              onChange={handleChange}
-            >
+            <RadioGroup name="typeOfPost" value={journeyData.type} onChange={handleChange} >
               <FormControlLabel value="private" control={<Radio />} label="Private" />
               <FormControlLabel value="public" control={<Radio />} label="Public" />
             </RadioGroup>
@@ -153,6 +146,7 @@ const MyJourney = () => {
         </Box>
       </Box>
 
+      </StyledEngineProvider>
       {/* <FormControl> */}
       {/* <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel> */}
 

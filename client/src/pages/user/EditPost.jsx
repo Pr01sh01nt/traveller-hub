@@ -3,7 +3,10 @@ import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { EditForm, EditImage } from '../../components/user/EditForm';
 import UserPost from '../../components/user/UserPost';
-
+import {Box, Button, TextField, Typography} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import editcss from './User.module.css'
 
 const EditPost = () => {
     const location = useLocation();
@@ -32,14 +35,19 @@ const EditPost = () => {
   return (
     <>
       
-           <div >
+          <div className= {editcss.editImage} >
             <EditImage id = {location.state?._id}/>
       
         </div>
 
+        <Box  compoent ="div" className= {editcss.editblock}>
+          {edit===true ? <EditForm data = {location.state} /> : <><UserPost data = {location.state}/><Button variant= "contained" sx={{mb : 1, mt : 2}} onClick = {handleClick} endIcon = {<EditIcon/>}>EDIT JOURNEY</Button> </>}
+        </Box>
 
-        {edit===true ? <EditForm data = {location.state} /> : <><UserPost data = {location.state}/><button onClick = {handleClick}>EDIT JOURNEY</button> </>}
-       <button onClick = {deleteJourney}>DELETE JOUNREY</button>
+        <Box sx={{display:"flex", justifyContent : "center", m : 4}} component="div">
+              <Button variant= "contained" color = "error" onClick = {deleteJourney} startIcon={<DeleteIcon />}>DELETE JOUNREY</Button>
+
+        </Box>
     </>
   )
 }

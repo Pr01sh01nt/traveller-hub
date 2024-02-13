@@ -1,4 +1,8 @@
 import React from 'react'
+import {Box, Button, TextField} from '@mui/material' 
+import { StyledEngineProvider } from '@mui/material/styles';
+
+
 
 const searchList = ({result,inputTag, setValue:{setSearch, getSearch}}) => {
     const handlMouseDown = ()=>{
@@ -9,12 +13,22 @@ const searchList = ({result,inputTag, setValue:{setSearch, getSearch}}) => {
     }
   return (
     <>
-       <div onMouseDown = {handlMouseDown}>
+       <Box  component = "div" sx={styles} onMouseDown = {handlMouseDown}>
         
         {result}
-       </div>
+       </Box> 
     </>
   )
 }
 
 export default searchList
+
+const styles = {
+  borderBottom: "2px solid black", 
+  width : 260, 
+  height : "2em", 
+  pt : 1,  
+  textAlign : "center",
+  cursor : "pointer",
+
+}

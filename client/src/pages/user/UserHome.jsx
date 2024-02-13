@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Box, Button, TextField, Typography} from '@mui/material';
 import { StyledEngineProvider } from '@mui/material/styles';
-
+import Carousel from '../../components/Carousel';
 
 
 
@@ -26,30 +26,46 @@ console.log("userhome rendered");
 const UserHome = () => {
   
     const [journeyData, setJourneyData] = useState([]);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // import imageId from backend and show all images
     useEffect(()=>{
-                 axios.get("http://localhost:3001/user/home")
-                        .then((response)=>{
-                            response = response.data;
-                            console.log(response); 
-                            let  userData = [];
-                            response.map((data)=>{
-                                console.log(data ,"dataa");
-                                console.log(data.imageId[0],"i am fetching");//taking only the first image
-   
-                   
-                                userData.push({myImg:data.imageId[0], userPost:data});
-                            });
-                            console.log(userData, "j");
-                            
-                            setJourneyData(userData);
-                        }) 
-                            .catch((err)=>{console.log(err)});
-
-
+      axios.get("http://localhost:3001/user/home")
+      .then((response)=>{
+        response = response.data;
+        console.log(response); 
+        let  userData = [];
+        response.map((data)=>{
+          console.log(data ,"dataa");
+          console.log(data.imageId[0],"i am fetching");//taking only the first image
+          
+          
+          userData.push({myImg:data.imageId[0], userPost:data});
+        });
+        console.log(userData, "j");
+        
+        setJourneyData(userData);
+      }) 
+      .catch((err)=>{console.log(err)});
+      
+      
     } , []);
- 
-  return (
+
+    let cardComponents = journeyData.map((data)=>{return <Cards key={data.userPost?._id} userPost={data.userPost}>
+      
+      <AdvancedImage className={`MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-o69gx8-MuiCardMedia-root`} alt="data" cldImg={cldImagee.image(data.myImg)} plugins={[lazyload()]} />
+    
+    </Cards>}) 
+    console.log(cardComponents);
+    return (
     <>
     
               
@@ -64,11 +80,10 @@ const UserHome = () => {
         </Box>
 
             <Typography variant= "h4">My travels</Typography>
-        <Box component= "div" className={usercss.cards}>
+        {/* <Box component= "div" className={usercss.cards}> */}
                  
-        {journeyData.length!=0 && journeyData.map((data)=><Cards key={data.userPost._id} userPost={data.userPost}><AdvancedImage className={usercss.img} alt="data" cldImg={cldImagee.image(data.myImg)} height={50} width={50}/></Cards>) }
-         
-        </Box>
+        <Carousel cardComponents={cardComponents}/>
+        {/* </Box> */}
 
         <Box component= "div" className={usercss.btn}>
             <Link to ="/people/experiances"><Button variant= "contained" className={usercss.view}> View other Expreinces</Button></Link>
@@ -77,5 +92,8 @@ const UserHome = () => {
     </>
   )
 }
+
+
+
 
 export default UserHome

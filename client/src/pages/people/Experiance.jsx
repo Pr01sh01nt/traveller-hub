@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react'
 import PostList from '../../components/people/PostList'
 import SearchBar from '../../components/people/SearchBar'
 import axios from 'axios'
-import useInfiniteScroll from '../../hooks/useInfiniteScroll'
- 
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
+import { Box } from '@mui/material';
 
- 
+
 axios.defaults.withCredentials = true;
 
 const Expreince = () => {
@@ -73,10 +73,12 @@ const Expreince = () => {
 
   return (
     <>
+    
         <SearchBar getSearch={getSearch}/>
                 
-         
-          {postList.posts?.map((post)=><PostList key={post.imageId[0]} post = {post}/>)}
+         <Box component= "div" sx = {{display : "flex", flexDirection : "column", alignItems : "center" }}>
+            {postList.posts?.map((post)=><PostList key={post.imageId[0]} post = {post}/>)}
+         </Box>
           {postList.lastPost && <span>LastPost reached</span>}
     
       

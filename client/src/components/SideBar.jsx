@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import {Box} from '@mui/material' 
     
 
-const SideBar = ({currState}) => {
+const SideBar = ({setIsSideBarOpened}) => {
   const {hasLogin,setHasLogin} = useContext(MyContext);
   const [cookie, setCookie,removeCokkie] = useCookies(["accesstoken"]);
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ const SideBar = ({currState}) => {
     console.log("logout");
     removeCokkie("accesstoken", { path: '/' }); 
     setHasLogin(2);
+    setIsSideBarOpened(false);
     navigate('/');
   }
 
@@ -25,17 +26,17 @@ const SideBar = ({currState}) => {
     <>
       <Box  component = "div" className={appcss.sideBar}>
     {hasLogin===1 ? (<>
-      <Link to="/user/home"  style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement}>Home</Box></Link>
+      <Link to="/user/home"  style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement} onClick = {()=>(setIsSideBarOpened(false))}>Home</Box></Link>
     </>):(<>
-    <Link to="/"  style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement}>Home</Box></Link> 
+    <Link to="/"  style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement} onClick = {()=>(setIsSideBarOpened(false))}>Home</Box></Link> 
     </>)}
     
 
     
-    <Link to="/about" style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement}>About</Box></Link>
-    <Link to="/contacts" style={{ textDecoration: 'none' }}><Box  component = "div"className={appcss.sideBarElement}>Contacts</Box></Link>
+    <Link to="/about" style={{ textDecoration: 'none' }}><Box component = "div" className={appcss.sideBarElement} onClick = {()=>(setIsSideBarOpened(false))}>About</Box></Link>
+    <Link to="/contacts" style={{ textDecoration: 'none' }}><Box  component = "div"className={appcss.sideBarElement} onClick = {()=>(setIsSideBarOpened(false))}>Contacts</Box></Link>
 
-    {hasLogin===1&& <Box  component = "div"className={appcss.sideBarElement} onClick={logout}>Logout</Box>}
+    {hasLogin===1&& <Box  component = "div"className={appcss.sideBarElement} onClick={logout} >Logout</Box>}
 
     </Box>
      

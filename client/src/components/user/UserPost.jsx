@@ -1,17 +1,18 @@
-import React from 'react'
+import React from 'react';
+import  Typography from '@mui/material/Typography';
 
 const UserPost = ({data:{placeOfJourney, description, type}}) => {
   return (
     <>
             <div>
-                <h1>{placeOfJourney}</h1>
-                
-                <p>
+                <Typography sx={{textAlign : "center"}} variant= "h1">{placeOfJourney}</Typography>
+                <Typography variant = "h5">Experiance : </Typography>
+                <Typography variant= "body1">
                     {description}
-                </p>
+                </Typography  >
             </div>
     </>
   )
 }
 
-export default UserPost
+export default UserPost;

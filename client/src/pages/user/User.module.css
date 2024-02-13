@@ -21,19 +21,6 @@
     /* border: 1px solid rgba( 255, 255, 255, 0.18 ); */
 }
 
-.cards{
-    /* display: flex; */
-    height: 100vh;
-    
-    /* min-width: 40vw;
-    min-height: 60vh; */
-
-    /* overflow: auto; */
-    /* border-top : dashed blueviolet 4px ;
-    border-bottom : dashed blueviolet 4px ; */
-
-    
-}
 
 .form{
     display: flex;
@@ -52,13 +39,108 @@
    
 }
 
-input{
-    min-height: 1.8em;
-    padding-bottom: 0;
+
+
+.img{
+    /* width: inherit; */
+    aspect-ratio: 1/1;
+    max-height: 30vmax;
+    /* height: 1400px; */
+}
+
+
+.cards{
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* overflow-x: auto; */
+    /* width: 1022vw; */
+    /* height: 100vh; */
+    
+    /* min-width: 40vw;
+    min-height: 60vh; */
+
+    /* overflow: auto; */
+    /* border-top : dashed blueviolet 4px ;
+    border-bottom : dashed blueviolet 4px ; */
+
     
 }
 
-.img{
-    width: 100%;
-    height: 100%;
+/* EditPost component and its child css */
+
+
+
+
+.editImage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border : solid 1px black;
+    box-shadow: 2.8px 5.8px 2.2px rgba(22, 88, 119, 0.938);
+
+    border-radius: 10px;
+    /* margin-top: 2px; */
+    margin : 0px 4px;
+    padding-top: 10px;
+    
+
 }
+
+
+
+
+
+
+.editblock{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+
+    margin: 10px 4px;
+    border : solid 1px black;
+    box-shadow: 2.8px 5.8px 2.2px rgba(22, 88, 119, 0.938);
+
+    border-radius: 10px;
+}
+
+
+/* Tablet: 600px and above */
+@media only screen and (min-width: 600px) {
+    /* Styles for tablet devices */
+    .input{
+        
+        width: 50vw;
+    }
+    .imageList{
+        max-width: 55vw;
+        max-height: 30vw;
+    }
+/* -------------------------------------------------- */
+    .imageContainer{
+        max-width: 100vw;
+        max-height: 40vw;
+    }
+
+    .cloudImage{
+        width: 30vw;      
+    }
+  }
+  
+  /* Desktop: 960px and above */
+  @media only screen and (min-width: 960px) {
+    /* Styles for desktop devices */
+  }
+  
+  /* Large Desktop: 1280px and above */
+  @media only screen and (min-width: 1280px) {
+    /* Styles for large desktop devices */
+  }
+  
+  /* Extra Large Desktop: 1920px and above */
+  @media only screen and (min-width: 1920px) {
+    /* Styles for extra large desktop devices */
+  }
