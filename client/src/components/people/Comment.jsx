@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import CommentInput from './CommentInput';
 import axios from 'axios';
 import { Box, Button, TextField, Typography, List, ListItem, ListItemText, Divider } from '@mui/material'
-import { StyledEngineProvider } from '@mui/material/styles';
+// import { StyledEngineProvider } from '@mui/material/styles';
 
 
 
@@ -15,10 +15,10 @@ const Comment = ({ postId }) => {
     try {
       const { data } = await axios.get("http://localhost:3001/people/experiance/comment", { withCredentials: true, params: { postId } });
       setComments(data);
-      console.log(data);
+      // console.log(data);
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
 
   }
@@ -31,17 +31,17 @@ const Comment = ({ postId }) => {
     if (comment !== "") {
       try {
         const response = await axios.post("http://localhost:3001/people/experiance/comment", { comment, postId });
-        console.log(response);
+        // console.log(response);
 
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     }
   }
 
   return (
     <>
-      {/* <Box  component= "div"> */}
+  
       <Button sx={{ mb: 2 }} variant="contained" onClick={handleCommentsClick}>See comments</Button>
   
       <div>
@@ -52,17 +52,14 @@ const Comment = ({ postId }) => {
               <ListItemText
                 primary={`${userId}`}
                 secondary={
-                  <>
-                   
+                  <>    
                       {comment}
                    </>
                 }
               />
             </ListItem>
             <Divider sx={{color:"black"}} variant="fullWidth" component="li" />
-            {/* <Typography variant='h5'>{userId} : </Typography> */}
-            {/* <Typography variant='bodu1'>{comment}</Typography> */}
-
+         
           </Box >)}
 
 
@@ -71,9 +68,9 @@ const Comment = ({ postId }) => {
       <CommentInput handleAddComment={handleAddComment} />
 
 
-      <Button variant="contained" onClick={handleClick}>Make a real time chat</Button>
+      {/* <Button variant="contained" onClick={handleClick}>Make a real time chat</Button> */}
 
-      {/* </Box > */}
+ 
 
     </>
   )

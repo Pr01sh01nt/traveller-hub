@@ -10,20 +10,20 @@ import { StyledEngineProvider } from '@mui/material/styles';
 export const Register = () => {
   const [userData, setData] = useState({dob:" "});
   const navigate = useNavigate();
-  console.log(userData);
+  // console.log(userData);
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-    console.log(userData);
+    // console.log(userData);
 
     try{
       const response = await axios.post("http://localhost:3001/auth/register", userData);
-      console.log(response);
+      // console.log(response);
         alert("user registered");
         navigate("/auth/login");
     }catch(err){
         alert('username exists');
-        console.log(err);
+        // console.log(err);
     }
 
   }

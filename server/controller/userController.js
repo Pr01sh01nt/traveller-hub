@@ -1,6 +1,6 @@
 const imageModel = require('../models/imageModel');
 const cloudinary = require('../utils/cloudinary');
-
+  
 exports.userHome  = async(req,res)=>{
     
     try{
@@ -25,14 +25,18 @@ exports.userJourney =  async(req,res)=>{
         console.log(req.files, 'files');
         console.log(req.body,  "body");
 
-        let images = [];
+        let   Images = [];
         for(let i = 0; i<req.files.length; i++)
         {
             
             const result = await cloudinary.upload(req.files[i].path);
-            images.push(result);
+     
+          
+            Images.push(result);
         }
-        req.body.imageId = images;
+     
+       
+        req.body.images = Images;
         req.body.userId = req.userId;
         console.log(req.body,  "bodyChange");
 
@@ -104,7 +108,9 @@ exports.deleteImages = async(req, res)=>{
         console.log(req.body, "hi");
         await req.body.imageId.map((image)=>{cloudinary.delete(image)});
         
-        const response = await imageModel.updateOne({_id : req.body._id, userId: req.userId}, {$pull : {imageId : {$in : req.body.imageId}} });
+        const response = await imageModel.updateOne({_id : req.body._id, userId: req.userId}, {$pull : {  images : {imageId : req.body.imageId} } });
+                                                                                                                      
+                                                                                                                      
         console.log(response, "deleted images");
         res.status(200).json("delted");
     }catch(err){
@@ -114,24 +120,46 @@ exports.deleteImages = async(req, res)=>{
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
 exports.addImages = async(req, res)=>{
     try{
         delete req.body.userId;
         console.log(req.files, "hello");
         console.log(req.body, "hi");
-        req.body.imageId = [];
+   
+    
+        req.body.images = [];
 
         for(const image of req.files)
         {
             const result = await cloudinary.upload(image.path);
-            req.body.imageId.push(result);
+          
+         
+            req.body.images.push(result);
         }
-
+        
         console.log(req.body, "new body");
         
-        const response = await imageModel.updateOne({_id : req.body._id, userId: req.userId}, {$addToSet : {imageId : {$each : req.body.imageId}} });
+        const response = await imageModel.updateOne({_id : req.body._id, userId: req.userId}, 
+            {$addToSet : {imageId : {$each : req.body.imageId},
+                           
+                            images : {$each : req.body.images }
+                            
+                        }
+                                });
+
         console.log(response, "imags added");
-        res.status(200).json(req.body.imageId);
+        res.status(200).json(req.body.images);
     }catch(err){
         console.log(err);
         res.status(500).json(err);
@@ -146,7 +174,7 @@ exports.getImages = async(req,res)=>{
         
         console.log(response[0], "images");
 
-        res.status(200).json(response[0].imageId);
+        res.status(200).json(response[0].images);
     }catch(err){
         console.log(err);
         res.status(500).json(err);

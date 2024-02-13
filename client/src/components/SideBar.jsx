@@ -1,7 +1,7 @@
 import React from 'react'
 import appcss from '../App.module.css'
 import { Link } from 'react-router-dom'
-import { useState, useRef, useContext } from 'react'
+import {  useContext } from 'react'
 import { MyContext } from '../context/MyContext'
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
@@ -14,7 +14,7 @@ const SideBar = ({setIsSideBarOpened}) => {
   const navigate = useNavigate();
 
   const logout = ()=>{
-    console.log("logout");
+    // console.log("logout");
     removeCokkie("accesstoken", { path: '/' }); 
     setHasLogin(2);
     setIsSideBarOpened(false);

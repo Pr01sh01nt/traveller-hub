@@ -2,7 +2,7 @@ import React from 'react'
 import appcss from '../App.module.css'
 import { Link } from 'react-router-dom'
 import SideBar from './SideBar'
-import { useState, useRef, useContext } from 'react'
+import { useState,  useContext } from 'react'
 import { MyContext } from '../context/MyContext'
 import { Box, Button, Avatar, Menu, MenuItem, Drawer } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
@@ -38,11 +38,11 @@ export const Navbar = () => {
 
       <Box component="div" className={appcss.navbar}>
         <Box component="div" onClick={handleClick} >
-          {sideBarIsOpened ? <CloseIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
+          {sideBarIsOpened ? <CloseIcon fontSize="large" /> : <MenuIcon sx={{cursor:"pointer"}} fontSize="large" />}
 
 
         </Box>
-        <img alt="img" src='/fav2.pn' />
+        <img alt="img" src='/fav2.png' height={50}/>
         {hasLogin === 1 ? <>
 
           <Avatar sx={{ width: 56, height: 56 }} onClick={handleAvatarClick}>P</Avatar>

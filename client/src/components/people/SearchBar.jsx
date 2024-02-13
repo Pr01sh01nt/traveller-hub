@@ -1,9 +1,9 @@
 import React, { useState, useRef, useMemo, memo } from 'react'
 import SearchList from './SearchList'
 import { searchData } from '../../pages/people/searchData'
-import { Box, Button, TextField, IconButton } from '@mui/material'
-import { StyledEngineProvider } from '@mui/material/styles';
+import { Box,  TextField, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
+// import { StyledEngineProvider } from '@mui/material/styles';
 
 
 const SearchBar = ({ getSearch }) => {
@@ -11,7 +11,7 @@ const SearchBar = ({ getSearch }) => {
     const [search, setSearch] = useState("");
     const [display, setDisplay] = useState(false);
     let searchResult = searchData(search);
-    console.log(searchResult);
+    // console.log(searchResult);
     const inputTag = useRef({});
 
 

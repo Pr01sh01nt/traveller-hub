@@ -13,16 +13,16 @@ export const Login = () => {
   const [_, setCookie] = useCookies(["accesstoken"]);
   const navigate = useNavigate();
 
-  console.log(userData, "from login");
+  // console.log(userData, "from login");
 
   const handleSubmit = async(event) => {
     event.preventDefault();
 
-    console.log(userData);
+    // console.log(userData);
 
     try{ 
       const response = await axios.post("http://localhost:3001/auth/login", userData);
-      console.log(response);
+      // console.log(response);
       setCookie("accesstoken", response.data.accesstoken, {path:'/'});
 
       if(response.data.accesstoken)
@@ -32,7 +32,7 @@ export const Login = () => {
       else alert('Something went wrong');
 
     }catch(err){
-        console.log(err);
+        // console.log(err);
         alert('Something went wrong!!');
     }
 

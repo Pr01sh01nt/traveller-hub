@@ -5,6 +5,8 @@ import { Box, Button, TextField, Typography, ImageList, ImageListItem, FormContr
 import { StyledEngineProvider } from '@mui/material/styles';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { styled } from '@mui/material/styles';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 
 
 
@@ -22,6 +24,8 @@ const VisuallyHiddenInput = styled('input')({
 
 const MyJourney = () => {
   const [journeyData, setJourneyData] = useState({ placeOfJourney: "", description: "", type: "public", images: [] });
+  const [isSaving, setIsSaving] = useState(false);
+
   console.log(journeyData);
 
 
@@ -58,9 +62,8 @@ const MyJourney = () => {
   }
 
   const handleSubmit = async (event) => {
+    setIsSaving(true);
     event.preventDefault();
-
-
     try {
 
       const formData = new FormData();
@@ -75,6 +78,8 @@ const MyJourney = () => {
 
       console.log('saving...');
       const res = await axios.post("http://localhost:3001/user/myjourney", formData);
+      setJourneyData({ placeOfJourney: "", description: "", type: "public", images: [] });
+      setIsSaving(false);
       console.log(res.data);
 
     } catch (err) {
@@ -86,71 +91,69 @@ const MyJourney = () => {
 
   return (
     <>
-    <StyledEngineProvider injectFirst>
-      <Typography variant="h3">
-        Write your travel Expreinces
-      </Typography>
-      <Box component="div" className={journeycss.form}>
-        <Box component="form" onSubmit={handleSubmit}  >
-       
-          <Box component="div" className={journeycss.formContent}>
-            <label htmlFor='placeOfJourney'>Place of Journey: </label><TextField className= {journeycss.input} variant="filled" id="placeOfJourney" name="placeOfJourney" type="text" onChange={handleChange} value={journeyData.placeOfJourney} required />
-          </Box>
+      <StyledEngineProvider injectFirst>
+        <Typography variant="h3">
+          Write your travel Expreinces
+        </Typography>
+        <Box component="div" className={journeycss.form}>
+          <Box component="form" onSubmit={handleSubmit}  >
 
-          <Box component="div" className={journeycss.formContent}>
-            <label htmlFor='journeyImage'>Add Journey images : </label>
+            <Box component="div" className={journeycss.formContent}>
+              <label htmlFor='placeOfJourney'>Place of Journey: </label><TextField className={journeycss.input} variant="filled" id="placeOfJourney" name="placeOfJourney" type="text" onChange={handleChange} value={journeyData.placeOfJourney} required />
+            </Box>
 
-            <Box component="div" sx={{ maxWidth: 250, maxHeight: 200, overflowY: 'auto' }} className={journeycss.imageList}>
+            <Box component="div" className={journeycss.formContent}>
+              <label htmlFor='journeyImage'>Add Journey images : </label>
 
-              <ImageList variant="masonry" gap={8}>
-                {journeyData.images.map((image) =>
-                  <ImageListItem key={image.size}>
-                    {console.log(image)}
-                    <img src={URL.createObjectURL(image)} alt="choosed images" />
-                  </ImageListItem>
-                )}
-              </ImageList>
+              <Box component="div" sx={{ maxWidth: 250, maxHeight: 200, overflowY: 'auto' }} className={journeycss.imageList}>
+
+                <ImageList variant="masonry" gap={8}>
+                  {journeyData.images.map((image) =>
+                    <ImageListItem key={image.size}>
+                      {console.log(image)}
+                      <img src={URL.createObjectURL(image)} alt="choosed images" />
+                    </ImageListItem>
+                  )}
+                </ImageList>
+
+              </Box>
+
+
+
+              <Button component="label" variant="contained" startIcon={<AddAPhotoIcon />}>
+                Add Images
+                <VisuallyHiddenInput type="file" multiple name="images" accept=".jpg, .jpeg, .png" onChange={handleChange} />
+              </Button>
+
+
 
             </Box>
 
 
 
-            <Button component="label" variant="contained" startIcon={<AddAPhotoIcon />}>
-              Add Images
-              <VisuallyHiddenInput type="file" multiple name="images" accept=".jpg, .jpeg, .png" onChange={handleChange} />
-            </Button>
+            <Box component="div" className={journeycss.formContent}>
+              <label htmlFor='description'>Description : </label><TextField className={journeycss.input} variant="filled" multiline id="description" name="description" value={journeyData.description} onChange={handleChange} required />
+            </Box>
 
 
+            <Box component="div" className={journeycss.formContent}>
+              Select type of Post :
+              <RadioGroup name="typeOfPost" value={journeyData.type} onChange={handleChange} >
+                <FormControlLabel value="private" control={<Radio />} label="Private" />
+                <FormControlLabel value="public" control={<Radio />} label="Public" />
+              </RadioGroup>
+            </Box>
+
+            <Box component="div" className={journeycss.formContent}>
+              <LoadingButton loading={isSaving} startIcon={<SaveIcon />} color="primary" loadingPosition="start" variant="contained" type="submit"><span>Save Journey</span></LoadingButton>
+
+            </Box>
 
           </Box>
-
-
-
-          <Box component="div" className={journeycss.formContent}>
-            <label htmlFor='description'>Description : </label><TextField className= {journeycss.input} variant="filled" multiline id="description" name="description" value={journeyData.description} onChange={handleChange} required />
-          </Box>
-
-
-          <Box component="div" className={journeycss.formContent}>
-            Select type of Post :
-            <RadioGroup name="typeOfPost" value={journeyData.type} onChange={handleChange} >
-              <FormControlLabel value="private" control={<Radio />} label="Private" />
-              <FormControlLabel value="public" control={<Radio />} label="Public" />
-            </RadioGroup>
-          </Box>
-
-          <Box component="div" className={journeycss.formContent}>
-            <Button variant="contained" type="submit">Save Journey</Button>
-          </Box>
-
         </Box>
-      </Box>
 
       </StyledEngineProvider>
-      {/* <FormControl> */}
-      {/* <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel> */}
 
-      {/* </FormControl> */}
     </>
   )
 }

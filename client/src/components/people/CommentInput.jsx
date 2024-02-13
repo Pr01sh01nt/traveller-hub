@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
-import {Box, Button, TextField} from '@mui/material' 
-import { StyledEngineProvider } from '@mui/material/styles';
+import { Button, TextField} from '@mui/material' 
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
+// import { StyledEngineProvider } from '@mui/material/styles';
 
 
 
 const CommentInput = ({handleAddComment}) => {
     const [comment, setComment] = useState("");
 
-    console.log(comment);
+    // console.log(comment);
 
   return (
     <>

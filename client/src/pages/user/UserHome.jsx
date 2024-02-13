@@ -2,14 +2,6 @@ import React, { Children } from 'react'
 import usercss from './User.module.css'
 import Cards from '../../components/user/Cards'
 import { Link, Outlet } from 'react-router-dom';
-import { Cloudinary} from "@cloudinary/url-gen";
-import {
-  AdvancedImage,
-  lazyload,
-  responsive,
-  accessibility,
-  placeholder
-} from "@cloudinary/react";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Box, Button, TextField, Typography} from '@mui/material';
@@ -19,15 +11,13 @@ import Carousel from '../../components/Carousel';
 
 
 
-const cldImagee = new Cloudinary({ cloud:{ cloudName: "dpsjn9leb" }});
-// const myImg = cldImagee.image("hvixjsawv1ad5e4opsle");
-console.log("userhome rendered");
 
 const UserHome = () => {
   
-    const [journeyData, setJourneyData] = useState([]);
-
-    
+  const [journeyData, setJourneyData] = useState([]);
+  
+  
+  console.log("userhome rendered");
     
     
     
@@ -45,10 +35,10 @@ const UserHome = () => {
         let  userData = [];
         response.map((data)=>{
           console.log(data ,"dataa");
-          console.log(data.imageId[0],"i am fetching");//taking only the first image
+          console.log(data?.images[0],"i am fetching");//taking only the first image
           
           
-          userData.push({myImg:data.imageId[0], userPost:data});
+          userData.push({myImg:data?.images[0]?.imageURL, userPost:data});
         });
         console.log(userData, "j");
         
@@ -59,12 +49,12 @@ const UserHome = () => {
       
     } , []);
 
-    let cardComponents = journeyData.map((data)=>{return <Cards key={data.userPost?._id} userPost={data.userPost}>
-      
-      <AdvancedImage className={`MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img css-o69gx8-MuiCardMedia-root`} alt="data" cldImg={cldImagee.image(data.myImg)} plugins={[lazyload()]} />
+    console.log(journeyData);
+
+    let cardComponents = journeyData.map((data)=>{return <Cards key={data?.userPost?._id} userPost={data?.userPost}>
+      {data.myImg}
     
     </Cards>}) 
-    console.log(cardComponents);
     return (
     <>
     

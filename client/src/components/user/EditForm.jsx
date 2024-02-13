@@ -152,7 +152,7 @@ export const EditImage = ({ id }) => {
     try {
       const response = await axios.post("http://localhost:3001/user/deleteimages", { imageId: selectedImageId.current, _id: id });
       console.log(response, "image deleted");
-      const imagesAfterDeletion = images.ids.filter((picture) => selectedImageId.current.find((image) => image === picture) !== undefined ? false : true);
+      const imagesAfterDeletion = images.ids.filter((picture) => selectedImageId.current.find((image) =>  image === picture.imageId) !== undefined ? false : true);
       selectedImageId.current=[];
       setImages({ ...images, ids: imagesAfterDeletion });
 
@@ -196,7 +196,9 @@ export const EditImage = ({ id }) => {
           <ImageList variant="masonry" gap={8}>
             {images.ids?.map((image) =>
               <ImageListItem sx = {{cursor : "pointer"}} key={image.size}>
-                <AdvancedImage style={{opacity:1}} className={editformcss.cloudImage} alt="IMAGES" cldImg={cldImage.image(image)} width={100} onClick={handleClick} imageId={image} plugins = {[lazyload()]}/>
+                {console.log(image,"&&&&&&&&&&&")}
+                {/* <img loading="lazy" src={`${image.imageURL}`} imageId={image.imageId} style={{opacity:1}} className={editformcss.cloudImage} alt="IMAGES" width={100}/> */}
+                <AdvancedImage style={{opacity:1}} className={editformcss.cloudImage} alt="IMAGES" cldImg={cldImage.image(image.imageId)} width={100} onClick={handleClick} imageId={image.imageId} plugins = {[lazyload()]}/>
               </ImageListItem>
             )}
           </ImageList>

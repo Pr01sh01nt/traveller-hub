@@ -2,14 +2,14 @@ const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
 
  cloudinary.config({ 
-    cloud_name: 'dpsjn9leb', 
-    api_key : '848929862227836',
-    api_secret: 'BomH9b0kOTeBa5NnlppKSJ4GlNc',
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+    api_key : process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true,
   
   });
 
-
+ 
   exports.upload = async(localImageFilePath)=>{
     try{
       console.log(localImageFilePath, "localImange");
@@ -25,7 +25,7 @@ const fs = require('fs');
       })        
         
         
-        return result.public_id;
+        return {imageURL : result.secure_url, imageId : result.public_id};
 
 
       }

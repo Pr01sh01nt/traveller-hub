@@ -3,7 +3,7 @@ import PostList from '../../components/people/PostList'
 import SearchBar from '../../components/people/SearchBar'
 import axios from 'axios'
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
-import { Box } from '@mui/material';
+import Box  from '@mui/material/Box';
 
 
 axios.defaults.withCredentials = true;
@@ -16,21 +16,21 @@ const Expreince = () => {
 
   const [endReach, setEndReach] = useInfiniteScroll(isFetching, postList.lastPost);
 
-    console.log(postList.search, "getsearch");
-    console.log('postlist renders', endReach);
+    // console.log(postList.search, "getsearch");
+    // console.log('postlist renders', endReach);
 
   // console.log("fetching.....");
   useEffect(()=>{
     if(postList.lastPost)
     return undefined;
-    console.log("last post ❤️😁🎉", postList.lastPost);
+    // console.log("last post", postList.lastPost);
     
     const controller = new AbortController();
     const signal = controller.signal;
     const fetchList = async()=>{
       try{
             const {data} = await axios.get("http://localhost:3001/people/experiances",{params:{jump:jump.current,search:postList.search}},{signal:signal});       
-            console.log(data,"i am fetched data :}");
+            // console.log(data,"i am fetched data :}");
             isFetching.current = false;
             
             if(data.length!=0)
@@ -38,7 +38,7 @@ const Expreince = () => {
               setPostList({...postList, posts:[...postList.posts,...data]});
             }
             else {
-              console.log("last post reached 🎉😁❤️❤️😁🎉", postList.lastPost);
+              // console.log("last post reached ", postList.lastPost);
               setPostList({...postList,lastPost:true});
             }
               
@@ -46,17 +46,17 @@ const Expreince = () => {
         jump.current-=2;
         isFetching.current = false;
         if(jump.current<0)jump.current = 0;
-        console.error(err,'e');
+        // console.error(err,'e');
       }
     }
-    console.log(isFetching.current,'isFetching');
-    console.log(postList.lastPost, 'lastpost');
+    // console.log(isFetching.current,'isFetching');
+    // console.log(postList.lastPost, 'lastpost');
     if(!isFetching.current && !postList.lastPost)// <------------------------------------------------
     {fetchList();
       isFetching.current = true;
     }  
     return ()=>{
-      console.log("abort signal called");
+      // console.log("abort signal called");
       controller.abort();
     }
   },[endReach]);
@@ -77,7 +77,7 @@ const Expreince = () => {
         <SearchBar getSearch={getSearch}/>
                 
          <Box component= "div" sx = {{display : "flex", flexDirection : "column", alignItems : "center" }}>
-            {postList.posts?.map((post)=><PostList key={post.imageId[0]} post = {post}/>)}
+            {postList.posts?.map((post)=><PostList key={post?.images[0]?.imageId} post = {post}/>)}
          </Box>
           {postList.lastPost && <span>LastPost reached</span>}
     

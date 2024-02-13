@@ -29,6 +29,7 @@ export function searchData(searchWord){
             result.push(words[i]);
             else break;
             
+            if(result.length >= 10)break;
         }
         return result;
     

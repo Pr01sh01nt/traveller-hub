@@ -5,7 +5,7 @@ const useInfiniteScroll = (isFetching, last) => {
   let [endReach, setEndReach] = useState(false);
   
 
-  console.log('useInfiniteScroll');
+  // console.log('useInfiniteScroll');
   
   useEffect(() => { 
     window.addEventListener('scroll', handleScroll);
@@ -15,7 +15,7 @@ const useInfiniteScroll = (isFetching, last) => {
   const handleScroll=(event)=> {
     if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight)
          { 
-           console.log('Fetch more list items!');
+          //  console.log('Fetch more list items!');
            if(!isFetching.current && !last)
            {          
                endReach = !endReach;

@@ -1,27 +1,21 @@
 import React from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Cloudinary } from "@cloudinary/url-gen";
-import {
-  AdvancedImage,
-  lazyload,
-  responsive,
-  accessibility,
-  placeholder
-} from "@cloudinary/react";
-import { Box, Button, TextField, Typography } from '@mui/material'
-import { StyledEngineProvider } from '@mui/material/styles';
+import {AdvancedImage} from "@cloudinary/react";
+import { Box, Typography } from '@mui/material'
+// import { StyledEngineProvider } from '@mui/material/styles';
 
 
-
+ 
 
 const cldImage = new Cloudinary({ cloud: { cloudName: "dpsjn9leb" } });
 
 
 const PostList = ({ post }) => {
   const navigate = useNavigate();
-  const image = cldImage.image(post.imageId[0]);
+  const image = cldImage.image(post.images[0].imageId);
 
-  console.log(post, "check me");
+  // console.log(post, "check me");
   const handleClick = () => {
 
     return navigate(`/people/experiance/${post.placeOfJourney}`, {
@@ -35,7 +29,7 @@ const PostList = ({ post }) => {
 
 
 
-      <Box  component="div" sx={cssParent} onClick={handleClick} className={post.imageId[0]}>
+      <Box  component="div" sx={cssParent} onClick={handleClick} className={post?.images[0]?.imageId}>
 
         {/* <Box component="div" sx={imageContainer}> */}
         <AdvancedImage alt="data" cldImg={image} style={imageStyle} />
@@ -155,4 +149,4 @@ const contentStyle = {
   display :"flex",
   flexDirection : "column",
   justifyContent : "space-between"
-}
+} 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Box, Stack, Button } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -20,7 +20,7 @@ const Carousel = ({ cardComponents }) => {
         if(index >= length)index = index % length;
         setIndexes({prev: (index-1+length)%length, curr : index, next : (index+1)%length});
     }
-    console.log(indexes);
+    // console.log(indexes);
 
     if (length != 0) {      
         return (

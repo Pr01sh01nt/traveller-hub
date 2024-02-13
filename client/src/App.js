@@ -1,6 +1,6 @@
 import './App.module.css';
 import { useState, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route,  Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar'
 import { Register } from './pages/auth/Register';
 import { Login } from './pages/auth/Login';
@@ -20,7 +20,7 @@ import { MyContext } from './context/MyContext';
 function App() {
   const [test, setTest] = useState(0);
   const { hasLogin } = useContext(MyContext);
-  console.log(hasLogin, "hasLogin from app.js");
+  // console.log(hasLogin, "hasLogin from app.js");
 
 
   console.log("render");
