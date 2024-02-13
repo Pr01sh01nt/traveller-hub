@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Box, Button, Typography, Card, CardActionArea, CardContent, Stack } from '@mui/material';
+import React from 'react';
+import { Box, Typography, Card, CardActionArea, CardContent, Stack } from '@mui/material';
 import { StyledEngineProvider } from '@mui/material/styles';
 import homecss from '../App.module.css';
-
+ 
 const Home = () => {
 
 

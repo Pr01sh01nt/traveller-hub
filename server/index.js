@@ -7,6 +7,7 @@ const authorization = require('./middlewares/authorization.middleware.js');
 const userRouter = require('./routes/user.js');
 const peopleRouter = require('./routes/people.js');
 const main = require('./config/db.js').main;
+require('dotenv').config();
 
 app.use(cors({
 

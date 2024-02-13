@@ -14,7 +14,7 @@ export const Navbar = () => {
 
 
   const [sideBarIsOpened, setIsSideBarOpened] = useState(false);
-  const { hasLogin, setHasLogin } = useContext(MyContext);
+  const { hasLogin } = useContext(MyContext);
 
   const handleClick = () => {
     setIsSideBarOpened(!sideBarIsOpened);
@@ -42,7 +42,7 @@ export const Navbar = () => {
 
 
         </Box>
-        <img alt="img" src='/fav2.png' height={50}/>
+        <img alt="img" src='/fav2.ico' height={50}/>
         {hasLogin === 1 ? <>
 
           <Avatar sx={{ width: 56, height: 56 }} onClick={handleAvatarClick}>P</Avatar>
