@@ -21,7 +21,7 @@ export const Login = () => {
     // console.log(userData);
 
     try{ 
-      const response = await axios.post("http://localhost:3001/auth/login", userData);
+      const response = await axios.post("/auth/login", userData);
       // console.log(response);
       setCookie("accesstoken", response.data.accesstoken, {path:'/'});
 

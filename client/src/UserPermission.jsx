@@ -16,7 +16,7 @@ export const UserPermission = ({pathValue}) => {
             // console.log("userpermissoin");
         const check = async () => {
             try {
-                const result = await axios.get(`http://localhost:3001/${pathValue}`, { withCredentials: true })
+                const result = await axios.get(`/${pathValue}`, { withCredentials: true })
                     .then((res) => {
                         // console.log(res.status);
                         return res.data;

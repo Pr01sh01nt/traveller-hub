@@ -19,8 +19,8 @@ const EditPost = () => {
     const deleteJourney = async()=>{  
       try{
         setIsDeleting(true);
-        const response = await axios.get("http://localhost:3001/user/deletejourney",{ params:{_id:location.state?._id}});
-        console.log(response, "deleted");
+        const response = await axios.get("/user/deletejourney",{ params:{_id:location.state?._id}});
+        // console.log(response, "deleted");
         navigate(-1);
 
         } catch(err){
@@ -33,9 +33,9 @@ const EditPost = () => {
       setEdit(!edit);
     }
     
-    console.log('edit post renders');
+    // console.log('edit post renders');
 
-    console.log(location.state,"showin from location");
+    // console.log(location.state,"showin from location");
 
   return (
     <>

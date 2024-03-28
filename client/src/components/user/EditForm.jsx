@@ -38,13 +38,13 @@ export const EditForm = ({ data: { placeOfJourney = "", description = "", type =
     }
 
   }
-  console.log(journeyData);
+  // console.log(journeyData);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/user/editpost", journeyData);
-      console.log(response, "edited");
+      const response = await axios.post("/user/editpost", journeyData);
+      // console.log(response, "edited");
 
     } catch (err) {
       console.log(err);
@@ -99,7 +99,7 @@ export const EditImage = ({ id }) => {
   const [isUploading, setIsUploading] = useState(false);
   // const imageTag = useRef(null);
 
-  console.log("edit image rendered");
+  // console.log("edit image rendered");
 
 
   const VisuallyHiddenInput = styled('input')({
@@ -117,9 +117,9 @@ export const EditImage = ({ id }) => {
   useEffect(() => {
     const getImages = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3001/user/getimages", { params: { _id: id } });
-        console.log("fetched iamges");
-        console.log(data);
+        const { data } = await axios.get("/user/getimages", { params: { _id: id } });
+        // console.log("fetched iamges");
+        // console.log(data);
         setImages({ ...images, ids: data });
       } catch (err) {
         console.log(err);
@@ -130,7 +130,7 @@ export const EditImage = ({ id }) => {
   }, [])
 
   const handleClick = (event) => {
-    console.log(event.target, "event occured");
+    // console.log(event.target, "event occured");
 
     let opacity = event.target.style.opacity;
     
@@ -143,15 +143,15 @@ export const EditImage = ({ id }) => {
       selectedImageId.current.push(imageId);
     else selectedImageId.current = selectedImageId.current.filter((id) => id !== imageId);
 
-    console.log(selectedImageId.current);
+    // console.log(selectedImageId.current);
 
   }
 
   const handleDelete = async () => {
 
     try {
-      const response = await axios.post("http://localhost:3001/user/deleteimages", { imageId: selectedImageId.current, _id: id });
-      console.log(response, "image deleted");
+      const response = await axios.post("/user/deleteimages", { imageId: selectedImageId.current, _id: id });
+      // console.log(response, "image deleted");
       const imagesAfterDeletion = images.ids.filter((picture) => selectedImageId.current.find((image) =>  image === picture.imageId) !== undefined ? false : true);
       selectedImageId.current=[];
       setImages({ ...images, ids: imagesAfterDeletion });
@@ -164,14 +164,14 @@ export const EditImage = ({ id }) => {
   }
   const handleAdd = async () => {
     if (images.addImages.length === 0) return;
-    console.log("handle add runs")
+    // console.log("handle add runs")
     try {
       setIsUploading(true);
       const formData = new FormData();
       formData.append("_id", id);
       images.addImages.map((images) => { formData.append("file", images) });
-      const { data } = await axios.post("http://localhost:3001/user/addimages", formData);
-      console.log(data, "image added");
+      const { data } = await axios.post("/user/addimages", formData);
+      // console.log(data, "image added");
 
 
       setImages({ addImages: [], ids: [...images.ids, ...data] });
@@ -196,7 +196,7 @@ export const EditImage = ({ id }) => {
           <ImageList variant="masonry" gap={8}>
             {images.ids?.map((image) =>
               <ImageListItem sx = {{cursor : "pointer"}} key={image.size}>
-                {console.log(image,"&&&&&&&&&&&")}
+                {/* {console.log(image)} */}
                 {/* <img loading="lazy" src={`${image.imageURL}`} imageId={image.imageId} style={{opacity:1}} className={editformcss.cloudImage} alt="IMAGES" width={100}/> */}
                 <AdvancedImage style={{opacity:1}} className={editformcss.cloudImage} alt="IMAGES" cldImg={cldImage.image(image.imageId)} width={100} onClick={handleClick} imageId={image.imageId} plugins = {[lazyload()]}/>
               </ImageListItem>

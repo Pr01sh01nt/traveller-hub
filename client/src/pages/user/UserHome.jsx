@@ -28,7 +28,7 @@ const UserHome = () => {
     
     // import imageId from backend and show all images
     useEffect(()=>{
-      axios.get("http://localhost:3001/user/home")
+      axios.get("/user/home")
       .then((response)=>{
         response = response.data;
         console.log(response); 

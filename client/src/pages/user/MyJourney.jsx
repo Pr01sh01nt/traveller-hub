@@ -26,10 +26,10 @@ const MyJourney = () => {
   const [journeyData, setJourneyData] = useState({ placeOfJourney: "", description: "", type: "public", images: [] });
   const [isSaving, setIsSaving] = useState(false);
 
-  console.log(journeyData);
+  // console.log(journeyData);
 
 
-  console.log("render of textarea");
+  // console.log("render of textarea");
 
 
   const handleChange = (event) => {
@@ -43,13 +43,13 @@ const MyJourney = () => {
       setJourneyData({ ...journeyData, description: event.target.value });
     else if (event.target.name === "images") {
       const length = event.target.files.length;
-      console.log("I Length", event.target.files);
+      // console.log("I Length", event.target.files);
       let img = [];
 
       img = Object.values(event.target.files);  // returns array
-      console.log("I img", img);
-      console.log(typeof (img));
-      console.log(img);
+      // console.log("I img", img);
+      // console.log(typeof (img));
+      // console.log(img);
 
 
       setJourneyData({ ...journeyData, images: img });
@@ -68,7 +68,7 @@ const MyJourney = () => {
 
       const formData = new FormData();
       for (const key in journeyData) {
-        console.log(key, journeyData[key]);
+        // console.log(key, journeyData[key]);
         if (key !== "images")
           formData.append(key, journeyData[key]);
         else journeyData[key].map((image) => { formData.append(key, image); });
@@ -76,14 +76,14 @@ const MyJourney = () => {
       }
 
 
-      console.log('saving...');
-      const res = await axios.post("http://localhost:3001/user/myjourney", formData);
+      // console.log('saving...');
+      const res = await axios.post("/user/myjourney", formData);
       setJourneyData({ placeOfJourney: "", description: "", type: "public", images: [] });
       setIsSaving(false);
-      console.log(res.data);
+      // console.log(res.data);
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
 
   }
@@ -110,7 +110,7 @@ const MyJourney = () => {
                 <ImageList variant="masonry" gap={8}>
                   {journeyData.images.map((image) =>
                     <ImageListItem key={image.size}>
-                      {console.log(image)}
+                      {/* {console.log(image)} */}
                       <img src={URL.createObjectURL(image)} alt="choosed images" />
                     </ImageListItem>
                   )}
