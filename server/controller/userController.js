@@ -5,7 +5,7 @@ exports.userHome  = async(req,res)=>{
     
     try{
         const images = await imageModel.find({userId : req.body.userId});
-        console.log(images);
+        // console.log(images);
         res.status(200).json(images);
         
     }catch(err)
@@ -22,8 +22,8 @@ exports.userHome  = async(req,res)=>{
 exports.userJourney =  async(req,res)=>{ 
     
     try{
-        console.log(req.files, 'files');
-        console.log(req.body,  "body");
+        // console.log(req.files, 'files');
+        // console.log(req.body,  "body");
 
         let   Images = [];
         for(let i = 0; i<req.files.length; i++)
@@ -68,10 +68,10 @@ exports.userEditJourney =  async(req,res)=>{
 
 exports.userDeleteJourney =  async(req,res)=>{
     try{
-        console.log(req.body,  "body");
-        console.log(req.query,  "query");   
+        // console.log(req.body,  "body");
+        // console.log(req.query,  "query");   
         const result = await imageModel.findOneAndDelete({_id : req.query._id, userId: req.userId});
-        console.log("deleted from mongoDb", result);
+        // console.log("deleted from mongoDb", result);
         //cloudinary deltete
 
         result.imageId.map((image)=>{cloudinary.delete(image)});
@@ -86,11 +86,11 @@ exports.userDeleteJourney =  async(req,res)=>{
 
 exports.editJourney = async(req,res)=>{
     try{    
-        console.log(req.body,'b2');
+        // console.log(req.body,'b2');
         const updatedData = req.body;
         delete updatedData.userId;
-        console.log(req.body, "body");
-        console.log(updatedData, "update");
+        // console.log(req.body, "body");
+        // console.log(updatedData, "update");
         const result = await imageModel.updateOne({_id : req.body._id,userId: req.userId}, {$set : updatedData});
         console.log(result, 'updated');
         res.status(200).json("updated");
@@ -105,13 +105,13 @@ exports.editJourney = async(req,res)=>{
 exports.deleteImages = async(req, res)=>{
     try{
         delete req.body.userId;
-        console.log(req.body, "hi");
+        // console.log(req.body, "hi");
         await req.body.imageId.map((image)=>{cloudinary.delete(image)});
         
         const response = await imageModel.updateOne({_id : req.body._id, userId: req.userId}, {$pull : {  images : {imageId : req.body.imageId} } });
                                                                                                                       
                                                                                                                       
-        console.log(response, "deleted images");
+        // console.log(response, "deleted images");
         res.status(200).json("delted");
     }catch(err){
         console.log(err);

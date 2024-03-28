@@ -7,9 +7,9 @@ exports.register = async (req, res, next) => {
 
     try {
         const data = req.body;
-
+        // console.log(data);
         const check = await travelUsers.findOne({ username: data.username });
-        console.log(check);
+        // console.log(check);
 
         if (check)
             throw new Error("username already present");
@@ -39,7 +39,7 @@ exports.login = async (req, res, next) => {
         if (!checkPassword)
             throw new Error("Password does not match");
 
-        console.log(userData);
+        // console.log(userData);
 
         const token = jwt.sign({ token: userData.username }, "@ec%r*i4)V");
 

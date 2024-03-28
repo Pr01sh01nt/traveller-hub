@@ -13,11 +13,11 @@ const fs = require('fs');
  
   exports.upload = async(localImageFilePath)=>{
     try{
-      console.log(localImageFilePath, "localImange");
+      // console.log(localImageFilePath, "localImange");
       if(localImageFilePath)
       {
         const result = await cloudinary.uploader.upload(localImageFilePath, {resource_type:  'image'});
-        console.log(result);
+        // console.log(result);
         
         
       fs.unlink(localImageFilePath,(err)=>{
@@ -51,7 +51,7 @@ const fs = require('fs');
       const result = await cloudinary.uploader.destroy(imageId, {
         resource_type: "image",
     });
-      console.log(result, "Cloudinary deleted");
+      // console.log(result, "Cloudinary deleted");
       return result;
       
     }
@@ -60,4 +60,4 @@ const fs = require('fs');
       return err;
     }
   }
-  console.log(cloudinary.config());
+  // console.log(cloudinary.config());
