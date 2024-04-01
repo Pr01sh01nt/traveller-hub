@@ -19,7 +19,7 @@ const EditPost = () => {
     const deleteJourney = async()=>{  
       try{
         setIsDeleting(true);
-        const response = await axios.get("/user/deletejourney",{ params:{_id:location.state?._id}});
+        const response = await axios.get("/api/user/deletejourney",{ params:{_id:location.state?._id}});
         // console.log(response, "deleted");
         navigate(-1);
 

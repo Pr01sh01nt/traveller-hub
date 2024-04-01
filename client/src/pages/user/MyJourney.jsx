@@ -77,7 +77,7 @@ const MyJourney = () => {
 
 
       // console.log('saving...');
-      const res = await axios.post("/user/myjourney", formData);
+      const res = await axios.post("/api/user/myjourney", formData);
       setJourneyData({ placeOfJourney: "", description: "", type: "public", images: [] });
       setIsSaving(false);
       // console.log(res.data);

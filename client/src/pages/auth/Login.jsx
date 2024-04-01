@@ -21,9 +21,14 @@ export const Login = () => {
     // console.log(userData);
 
     try{ 
-      const response = await axios.post("/auth/login", userData);
-      // console.log(response);
+      const response = await axios.post("/api/auth/login", userData);
+      console.log(response);
+      response = await response.json();
+      console.log(response);
       setCookie("accesstoken", response.data.accesstoken, {path:'/'});
+      console.log(response.data);
+      console.log(response.data?.accesstoken);
+     
 
       if(response.data.accesstoken)
       {

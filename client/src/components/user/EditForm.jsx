@@ -43,7 +43,7 @@ export const EditForm = ({ data: { placeOfJourney = "", description = "", type =
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/user/editpost", journeyData);
+      const response = await axios.post("/api/user/editpost", journeyData);
       // console.log(response, "edited");
 
     } catch (err) {
@@ -117,7 +117,7 @@ export const EditImage = ({ id }) => {
   useEffect(() => {
     const getImages = async () => {
       try {
-        const { data } = await axios.get("/user/getimages", { params: { _id: id } });
+        const { data } = await axios.get("/api/user/getimages", { params: { _id: id } });
         // console.log("fetched iamges");
         // console.log(data);
         setImages({ ...images, ids: data });
@@ -150,7 +150,7 @@ export const EditImage = ({ id }) => {
   const handleDelete = async () => {
 
     try {
-      const response = await axios.post("/user/deleteimages", { imageId: selectedImageId.current, _id: id });
+      const response = await axios.post("/api/user/deleteimages", { imageId: selectedImageId.current, _id: id });
       // console.log(response, "image deleted");
       const imagesAfterDeletion = images.ids.filter((picture) => selectedImageId.current.find((image) =>  image === picture.imageId) !== undefined ? false : true);
       selectedImageId.current=[];
@@ -170,7 +170,7 @@ export const EditImage = ({ id }) => {
       const formData = new FormData();
       formData.append("_id", id);
       images.addImages.map((images) => { formData.append("file", images) });
-      const { data } = await axios.post("/user/addimages", formData);
+      const { data } = await axios.post("/api/user/addimages", formData);
       // console.log(data, "image added");
 
 

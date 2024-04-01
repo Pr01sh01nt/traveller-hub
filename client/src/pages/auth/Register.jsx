@@ -17,7 +17,7 @@ export const Register = () => {
     // console.log(userData);
 
     try{
-      const response = await axios.post("/auth/register", userData);
+      const response = await axios.post("/api/auth/register", userData);
       // console.log(response);
         alert("user registered");
         navigate("/auth/login");

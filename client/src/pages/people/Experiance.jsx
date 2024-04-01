@@ -29,7 +29,7 @@ const Expreince = () => {
     const signal = controller.signal;
     const fetchList = async()=>{
       try{
-            const {data} = await axios.get("/people/experiances",{params:{jump:jump.current,search:postList.search}},{signal:signal});       
+            const {data} = await axios.get("/api/people/experiances",{params:{jump:jump.current,search:postList.search}},{signal:signal});       
             // console.log(data,"i am fetched data :}");
             isFetching.current = false;
             

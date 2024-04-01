@@ -13,7 +13,7 @@ const Comment = ({ postId }) => {
 
   const handleCommentsClick = async () => {
     try {
-      const { data } = await axios.get("/people/experiance/comment", { withCredentials: true, params: { postId } });
+      const { data } = await axios.get("/api/people/experiance/comment", { withCredentials: true, params: { postId } });
       setComments(data);
       // console.log(data);
 
@@ -30,7 +30,7 @@ const Comment = ({ postId }) => {
   const handleAddComment = async (comment) => {
     if (comment !== "") {
       try {
-        const response = await axios.post("/people/experiance/comment", { comment, postId });
+        const response = await axios.post("/api/people/experiance/comment", { comment, postId });
         // console.log(response);
 
       } catch (err) {

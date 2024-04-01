@@ -26,14 +26,29 @@ main().catch((err) => { console.log(err); })
 
 app.post('/', (req,res)=>{
     res.json(req.body);
+});
+
+
+app.use('/api/auth', authRouter);
+
+app.use('/api/user', authorization, userRouter);
+
+app.use('/api/people', authorization, peopleRouter);
+
+
+app.get('/api', (req, res)=>{
+    res.json("hey, you made the connection with server");
+});
+
+
+app.post('/api', (req, res)=>{
+    res.json("hey, you made the connection with server");
+});
+
+app.get('/', (req, res)=>{
+    res.json("hey, you made the connection with server");
 })
 
-
-app.use('/auth', authRouter);
-
-app.use('/user', authorization, userRouter);
-
-app.use('/people', authorization, peopleRouter);
 
 app.use("", authorization, (req,res)=>{
     res.status(200).json("");

@@ -11,17 +11,17 @@ export const UserPermission = ({pathValue}) => {
     const {hasLogin, setHasLogin} = useContext(MyContext);
     // console.log(location.pathname);
 
-    // console.log(hasLogin, "hasLogin rendered from userPermission");
+    console.log(hasLogin, "hasLogin rendered from userPermission");
     useEffect(() => {
-            // console.log("userpermissoin");
+            console.log("userpermissoin");
         const check = async () => {
             try {
                 const result = await axios.get(`/${pathValue}`, { withCredentials: true })
                     .then((res) => {
-                        // console.log(res.status);
+                        console.log(res.status);
                         return res.data;
                     });
-                // console.log(result, "RES");
+                console.log(result, "RES");
                     
                
                 setHasLogin(1);
@@ -31,8 +31,8 @@ export const UserPermission = ({pathValue}) => {
             } catch (e) {
            
                 setHasLogin(2);
-                // console.log('hi');
-                // console.log(e);
+                console.log('hi');
+                console.log(e);
               
             }
         }
