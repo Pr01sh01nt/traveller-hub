@@ -35,24 +35,24 @@ app.use('/api/user', authorization, userRouter);
 
 app.use('/api/people', authorization, peopleRouter);
 
+app.use("/api", authorization, (req,res)=>{
+    res.status(200).json("");
+})
 
-app.get('/api', (req, res)=>{
-    res.json("hey, you made the connection with server");
-});
-
-
-app.post('/api', (req, res)=>{
-    res.json("hey, you made the connection with server");
-});
 
 app.get('/', (req, res)=>{
     res.json("hey, you made the connection with server");
 })
 
+// app.get('/api', (req, res)=>{
+//     res.json("hey, you made the connection with server");
+// });
 
-app.use("", authorization, (req,res)=>{
-    res.status(200).json("");
-})
+
+// app.post('/api', (req, res)=>{
+//     res.json("hey, you made the connection with server");
+// });
+
 
 
 app.listen(process.env.PORT, () => { console.log(`server is running on ${process.env.PORT}`) });

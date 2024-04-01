@@ -23,8 +23,8 @@ export const Login = () => {
     try{ 
       const response = await axios.post("/api/auth/login", userData);
       console.log(response);
-      response = await response.json();
-      console.log(response);
+      //response = await response.json();
+      //console.log(response);
       setCookie("accesstoken", response.data.accesstoken, {path:'/'});
       console.log(response.data);
       console.log(response.data?.accesstoken);
@@ -37,7 +37,7 @@ export const Login = () => {
       else alert('Something went wrong');
 
     }catch(err){
-        // console.log(err);
+         console.log(err);
         alert('Something went wrong!!');
     }
 
