@@ -29,7 +29,7 @@ const Expreince = () => {
     const signal = controller.signal;
     const fetchList = async()=>{
       try{
-            const {data} = await axios.get("/api/people/experiances",{params:{jump:jump.current,search:postList.search}},{signal:signal});       
+            const {data} = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/people/experiances`,{params:{jump:jump.current,search:postList.search}},{signal:signal});       
             // console.log(data,"i am fetched data :}");
             isFetching.current = false;
             
@@ -69,13 +69,13 @@ const Expreince = () => {
     setEndReach(!endReach);
   };
   
-  
+  console.log(postList, "hi");
 
   return (
     <>
     
         <SearchBar getSearch={getSearch}/>
-                
+                 
          <Box component= "div" sx = {{display : "flex", flexDirection : "column", alignItems : "center" }}>
             {postList.posts?.map((post)=><PostList key={post?.images[0]?.imageId} post = {post}/>)}
          </Box>

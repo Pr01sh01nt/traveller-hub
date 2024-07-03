@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import {Box, Button, TextField} from '@mui/material' 
 import { StyledEngineProvider } from '@mui/material/styles';
-
+import toast from 'react-hot-toast';
 
 export const Register = () => {
   const [userData, setData] = useState({dob:" "});
@@ -17,13 +17,14 @@ export const Register = () => {
     // console.log(userData);
 
     try{
-      const response = await axios.post("/api/auth/register", userData);
+      const response = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/auth/register`, userData);
       // console.log(response);
-        alert("user registered");
+        
+        toast.success('User Registered');
         navigate("/auth/login");
     }catch(err){
-        alert('username exists');
-        // console.log(err);
+        toast.error('Username exists');
+       
     }
 
   }

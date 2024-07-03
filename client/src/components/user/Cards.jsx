@@ -27,11 +27,14 @@ const Cards = ({ children, userPost }) => {
               component="img"
               image={`${children}`}
               alt="image"
+              className=' aspect-square'
             />
 
-            <CardContent >
+            <CardContent 
+              className=' h-[150px]'
+            >
               <Typography gutterBottom variant="h5">
-                {userPost.placeOfJourney}
+                {userPost.placeOfJourney.substr(0,40)}
               </Typography>
               <Typography variant="body2" color="text.secondary" className={usercss.cardContent}>
                 {userPost.description.substr(0, 150)}

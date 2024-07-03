@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Card, CardActionArea, CardContent, Stack } from '@mui/material';
 import { StyledEngineProvider } from '@mui/material/styles';
 import homecss from '../App.module.css';
+import { Link } from 'react-router-dom';
  
 const Home = () => {
 
@@ -22,6 +23,8 @@ const Home = () => {
 
     
         </Box>
+
+        
     <Box component="div" >
       <img src="https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt = "img" className={homecss.image}/>
     </Box>

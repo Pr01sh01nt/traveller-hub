@@ -134,8 +134,8 @@ exports.deleteImages = async(req, res)=>{
 exports.addImages = async(req, res)=>{
     try{
         delete req.body.userId;
-        console.log(req.files, "hello");
-        console.log(req.body, "hi");
+        // console.log(req.files, "hello");
+        // console.log(req.body, "hi");
    
     
         req.body.images = [];
@@ -148,7 +148,7 @@ exports.addImages = async(req, res)=>{
             req.body.images.push(result);
         }
         
-        console.log(req.body, "new body");
+        // console.log(req.body, "new body");
         
         const response = await imageModel.updateOne({_id : req.body._id, userId: req.userId}, 
             {$addToSet : {imageId : {$each : req.body.imageId},

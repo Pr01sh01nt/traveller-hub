@@ -77,7 +77,7 @@ const MyJourney = () => {
 
 
       // console.log('saving...');
-      const res = await axios.post("/api/user/myjourney", formData);
+      const res = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/user/myjourney`, formData);
       setJourneyData({ placeOfJourney: "", description: "", type: "public", images: [] });
       setIsSaving(false);
       // console.log(res.data);
@@ -146,7 +146,7 @@ const MyJourney = () => {
 
             <Box component="div" className={journeycss.formContent}>
               <LoadingButton loading={isSaving} startIcon={<SaveIcon />} color="primary" loadingPosition="start" variant="contained" type="submit"><span>Save Journey</span></LoadingButton>
-
+                  
             </Box>
 
           </Box>

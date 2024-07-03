@@ -11,7 +11,7 @@ const fs = require('fs');
   });
 
  
-  exports.upload = async(localImageFilePath)=>{
+exports.upload = async(localImageFilePath)=>{
     try{
       // console.log(localImageFilePath, "localImange");
       if(localImageFilePath)

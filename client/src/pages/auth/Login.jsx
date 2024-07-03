@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import {Box, Button, TextField} from '@mui/material' 
 import { StyledEngineProvider } from '@mui/material/styles';
-
+import toast from 'react-hot-toast';
 
 export const Login = () => {
   const [userData, setData] = useState({});
-  const [_, setCookie] = useCookies(["accesstoken"]);
+  // const [_, setCookie] = useCookies(["accesstoken"]);
   const navigate = useNavigate();
 
   // console.log(userData, "from login");
@@ -21,11 +21,14 @@ export const Login = () => {
     // console.log(userData);
 
     try{ 
-      const response = await axios.post("/api/auth/login", userData);
+      // console.log(process.env.REACT_APP_API_ENDPOINT);
+      const response = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/auth/login`, userData, {
+        withCredentials : true
+      });
       console.log(response);
-      response = await response.json();
-      console.log(response);
-      setCookie("accesstoken", response.data.accesstoken, {path:'/'});
+      // response = await response.json();
+      // console.log(response);
+      // setCookie("accesstoken", response.data.accesstoken, {path:'/'});
       console.log(response.data);
       console.log(response.data?.accesstoken);
      
@@ -34,14 +37,13 @@ export const Login = () => {
       {
         navigate("/user/home");
       }
-      else alert('Something went wrong');
+      else toast.error('Something went wrong');
 
     }catch(err){
-        // console.log(err);
-        alert('Something went wrong!!');
+        toast.error('Something went wrong!!');
     }
 
-  }
+  };
 
   return (
     <>

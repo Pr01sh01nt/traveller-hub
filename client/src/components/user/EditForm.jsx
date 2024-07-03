@@ -16,7 +16,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import editformcss from '../../pages/user/User.module.css'
+import editformcss from '../../pages/user/User.module.css';
 
 
 const cldImage = new Cloudinary({ cloud: { cloudName: "dpsjn9leb" } });
@@ -43,8 +43,8 @@ export const EditForm = ({ data: { placeOfJourney = "", description = "", type =
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/api/user/editpost", journeyData);
-      // console.log(response, "edited");
+      const response = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/user/editpost`, journeyData);
+      console.log(response, "edited");
 
     } catch (err) {
       console.log(err);
@@ -117,7 +117,7 @@ export const EditImage = ({ id }) => {
   useEffect(() => {
     const getImages = async () => {
       try {
-        const { data } = await axios.get("/api/user/getimages", { params: { _id: id } });
+        const { data } = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/user/getimages`, { params: { _id: id } });
         // console.log("fetched iamges");
         // console.log(data);
         setImages({ ...images, ids: data });
@@ -150,7 +150,7 @@ export const EditImage = ({ id }) => {
   const handleDelete = async () => {
 
     try {
-      const response = await axios.post("/api/user/deleteimages", { imageId: selectedImageId.current, _id: id });
+      const response = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/user/deleteimages`, { imageId: selectedImageId.current, _id: id });
       // console.log(response, "image deleted");
       const imagesAfterDeletion = images.ids.filter((picture) => selectedImageId.current.find((image) =>  image === picture.imageId) !== undefined ? false : true);
       selectedImageId.current=[];
@@ -170,7 +170,7 @@ export const EditImage = ({ id }) => {
       const formData = new FormData();
       formData.append("_id", id);
       images.addImages.map((images) => { formData.append("file", images) });
-      const { data } = await axios.post("/api/user/addimages", formData);
+      const { data } = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/user/addimages`, formData);
       // console.log(data, "image added");
 
 

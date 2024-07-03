@@ -15,9 +15,9 @@ router.use('*', (req, res, next)=>{
         const verifiction = jwt.verify(cookie,process.env.JWT_SECRET); 
         console.log(verifiction);
         req.userId = verifiction.token;  
-        req.body.userId = verifiction.token;  
+        req.body.userId = verifiction.token;
         
-        // console.log(req.body,"from auth middlewhere"); 
+        // console.log(req.body,"from auth middlewhere");
         next();
 
 

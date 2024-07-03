@@ -1,8 +1,8 @@
 import React from 'react'
 import appcss from '../App.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SideBar from './SideBar'
-import { useState,  useContext } from 'react'
+import { useState, useContext } from 'react'
 import { MyContext } from '../context/MyContext'
 import { Box, Button, Avatar, Menu, MenuItem, Drawer } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
@@ -11,10 +11,10 @@ import CloseIcon from '@mui/icons-material/Close';
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
+  const navigate = useNavigate();
 
   const [sideBarIsOpened, setIsSideBarOpened] = useState(false);
-  const { hasLogin } = useContext(MyContext);
+  const { hasLogin, user } = useContext(MyContext);
 
   const handleClick = () => {
     setIsSideBarOpened(!sideBarIsOpened);
@@ -38,14 +38,20 @@ export const Navbar = () => {
 
       <Box component="div" className={appcss.navbar}>
         <Box component="div" onClick={handleClick} >
-          {sideBarIsOpened ? <CloseIcon fontSize="large" /> : <MenuIcon sx={{cursor:"pointer"}} fontSize="large" />}
-
-
+          {sideBarIsOpened ? <CloseIcon fontSize="large" /> : <MenuIcon sx={{ cursor: "pointer" }} fontSize="large" />}
         </Box>
-        <img alt="img" src='/fav2.ico' height={50}/>
+
+
+        <img alt="img" src='/fav2.ico' className=' aspect-square h-[50px] cursor-pointer' onClick={() => { navigate("/") }} />
+
         {hasLogin === 1 ? <>
 
-          <Avatar sx={{ width: 56, height: 56 }} onClick={handleAvatarClick}>P</Avatar>
+          <Avatar
+            sx={{ width: 56, height: 56 }}
+            onClick={handleAvatarClick}
+            className=' cursor-pointer'
+            src={user?.profilePicURL}
+          >P</Avatar>
           <Menu
             anchorEl={anchorEl}
             open={open}
@@ -53,9 +59,13 @@ export const Navbar = () => {
           >
 
 
-            <MenuItem onClick={handleAvatarClose}>Profile</MenuItem>
+            <MenuItem onClick={(e) => {
+              handleAvatarClose(e);
+              navigate('/profile');
+            }}>Profile</MenuItem>
             <MenuItem onClick={handleAvatarClose}>My account</MenuItem>
-            <MenuItem onClick={handleAvatarClose} name="logout">Logout</MenuItem>
+
+
 
 
           </Menu> </> : <Link to="/auth/register" style={{ textDecoration: 'none' }}><Button variant="contained">CONNECT JOURNEY</Button></Link>}
@@ -67,7 +77,7 @@ export const Navbar = () => {
         open={sideBarIsOpened}
         onClose={handleClick}
       >
-        <SideBar setIsSideBarOpened = {setIsSideBarOpened} />
+        <SideBar setIsSideBarOpened={setIsSideBarOpened} />
       </Drawer>
 
 

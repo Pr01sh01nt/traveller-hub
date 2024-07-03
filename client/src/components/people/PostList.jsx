@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { Cloudinary } from "@cloudinary/url-gen";
-import {AdvancedImage} from "@cloudinary/react";
+import { AdvancedImage } from "@cloudinary/react";
 import { Box, Typography } from '@mui/material'
 // import { StyledEngineProvider } from '@mui/material/styles';
 
 
- 
+
 
 const cldImage = new Cloudinary({ cloud: { cloudName: "dpsjn9leb" } });
 
@@ -29,7 +29,13 @@ const PostList = ({ post }) => {
 
 
 
-      <Box  component="div" sx={cssParent} onClick={handleClick} className={post?.images[0]?.imageId}>
+      <Box
+        component="div"
+        sx={cssParent}
+        onClick={handleClick}
+        className={`${post?.images[0]?.imageId} rounded-xl`}
+        
+      >
 
         {/* <Box component="div" sx={imageContainer}> */}
         <AdvancedImage alt="data" cldImg={image} style={imageStyle} />
@@ -50,7 +56,7 @@ const PostList = ({ post }) => {
             </Typography>
 
             <Typography variant="body1">
-              {post.description.substr(0,150)}
+              {post.description.substr(0, 150)}
 
             </Typography>
           </Box>
@@ -63,6 +69,18 @@ const PostList = ({ post }) => {
 
               {post.userId}
             </Typography>
+            
+          </Box>
+
+          <Box component="div" sx={userStyle}>
+            <Typography
+              variant='body1'
+              className='text-right'
+            >
+              {post.createdAt.substr(0,10)}
+
+            </Typography>
+           
           </Box>
 
 
@@ -77,7 +95,7 @@ const PostList = ({ post }) => {
 export default PostList
 
 const cssParent = {
-  
+
   display: "flex",
 
   border: 'black solid 2px',
@@ -87,7 +105,7 @@ const cssParent = {
   maxHeight: "45vh",
   overflow: "hidden",
   boxShadow: "2px 2px 4px blue",
-  cursor : "pointer",
+  cursor: "pointer",
   // p : "2px"
 
 
@@ -114,7 +132,7 @@ const imageStyle = {
 const placeStyle = {
   // border: "solid 4px blue",
   height: 'fit-content',
-  mb:1,
+  mb: 1,
   // fontSize : "1.5em",
   // maxWidth : "99%",
   // maxHeight: "10vh",
@@ -123,10 +141,10 @@ const placeStyle = {
 const experianceStyle = {
 
   // border: "solid 4px green",
-  overflow : "hidden",
-  textOverflow : 'ellipsis',
+  overflow: "hidden",
+  textOverflow: 'ellipsis',
   height: 'fit-content',
-  mb:1,
+  mb: 1,
   // fontSize : "1.5em",
   // maxWidth : "99%",
   maxHeight: "40%",
@@ -146,7 +164,7 @@ const contentStyle = {
   // border: "solid violet 2px",
   width: "100%",
   p: 1,
-  display :"flex",
-  flexDirection : "column",
-  justifyContent : "space-between"
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between"
 } 

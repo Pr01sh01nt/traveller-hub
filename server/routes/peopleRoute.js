@@ -10,6 +10,7 @@ router.get("/experiance/comment", people_controller.getComments);
 
 router.post("/experiance/comment", people_controller.postComments);
 
+router.get("/", people_controller.getProfile);
 
 router.get("/*",(req,res)=>{
     res.status(200).json();

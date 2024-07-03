@@ -13,9 +13,9 @@ const Comment = ({ postId }) => {
 
   const handleCommentsClick = async () => {
     try {
-      const { data } = await axios.get("/api/people/experiance/comment", { withCredentials: true, params: { postId } });
+      const { data } = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}/api/people/experiance/comment`, { withCredentials: true, params: { postId } });
       setComments(data);
-      // console.log(data);
+      console.log(data);
 
     } catch (err) {
       // console.log(err);
@@ -30,7 +30,7 @@ const Comment = ({ postId }) => {
   const handleAddComment = async (comment) => {
     if (comment !== "") {
       try {
-        const response = await axios.post("/api/people/experiance/comment", { comment, postId });
+        const response = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/people/experiance/comment`, { comment, postId });
         // console.log(response);
 
       } catch (err) {
@@ -41,26 +41,57 @@ const Comment = ({ postId }) => {
 
   return (
     <>
-  
-      <Button sx={{ mb: 2 }} variant="contained" onClick={handleCommentsClick}>See comments</Button>
-  
+
+      <Button
+        sx={{ mb: 2, mt: 2 }}
+        variant="contained"
+        onClick={handleCommentsClick}
+
+      >
+        See comments
+      </Button>
+
       <div>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-          {comments.map(({ userId, comment, _id }) => <Box sx={{ mb: 1 }} component="div" key={_id}>
 
-            <ListItem alignItems="flex-start">
-              <ListItemText
-                primary={`${userId}`}
-                secondary={
-                  <>    
-                      {comment}
-                   </>
-                }
-              />
-            </ListItem>
-            <Divider sx={{color:"black"}} variant="fullWidth" component="li" />
-         
-          </Box >)}
+          {comments.map(({ userId, comment, _id, createdAt }) =>
+            <Box sx={{ mb: 1 }} component="div" key={_id}>
+
+
+
+          <div 
+            className='w-[50vw] rounded-xl'
+          >
+            <div 
+              className='flex justify-between mb-2 pl-2'
+            >
+              <div className='w-[20vw]'>
+
+              @
+              <b>
+
+              {userId}
+              </b>
+              </div>
+              
+              <div className='w-[20vw] text-right'>
+                
+              {createdAt.substr(0,10)}
+              </div>
+            </div>
+            
+            
+
+            <div className='pl-2 text-[rgb(83,81,81)]'>
+              {comment}
+            </div>
+
+              <Divider sx={{ color: "black" }} variant="fullWidth" component="li" />
+          </div>
+             
+             
+
+            </Box >)}
 
 
         </List>
@@ -70,7 +101,7 @@ const Comment = ({ postId }) => {
 
       {/* <Button variant="contained" onClick={handleClick}>Make a real time chat</Button> */}
 
- 
+
 
     </>
   )

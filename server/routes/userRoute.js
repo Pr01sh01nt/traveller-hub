@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const user_controller = require('../controller/userController');
+const user_controller = require('../controller/userController.js');
 const upload = require('../middlewares/multer.middleware.js').upload;
 
 

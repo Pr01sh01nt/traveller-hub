@@ -1,5 +1,6 @@
 const imageModel = require('../models/imageModel');
 const commentModel = require('../models/commentModel');
+const authModel = require('../models/authModel');
 
 exports.peopleExperinces = async(req,res)=>{
     const jump = req.query.jump;
@@ -44,6 +45,25 @@ exports.getComments = async(req, res)=>{
         // console.log(response,"comments");
         res.status(200).json(response);
     }catch(err){
-        res.status(500).json({});
+        res.status(500).json(err);
+    }
+}
+
+
+exports.getProfile = async(req, res)=>{
+
+    try{
+        console.log(req.query);
+        const response = await authModel.findOne({username : req.query?.username});
+        response.password = undefined;
+        res.status(200).send(response);
+
+    }catch(err)
+    {
+        console.error(err);
+        res.status(401).send({
+            success : "error",
+            message : err,
+        })
     }
 }

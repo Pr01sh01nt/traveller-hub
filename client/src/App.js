@@ -15,6 +15,11 @@ import { UserPermission } from './UserPermission';
 import Post from './pages/people/Post'
 import EditPost from './pages/user/EditPost';
 import { MyContext } from './context/MyContext';
+import Profile from './pages/user/Profile';
+import TermsAndConditions from './pages/TermsAndConditions';
+
+import toast, { Toaster } from 'react-hot-toast';
+import PeopleProfile from './pages/people/Profile';
 
 
 function App() {
@@ -30,14 +35,16 @@ function App() {
 
     <>
 
+      <Toaster/>
       <Router>
         <Navbar />
         <Routes>
+          
           <Route path="" element={<UserPermission pathValue={""}/> }> 
                 <Route path="" element =  {hasLogin === 1 ? <Navigate to = "/user/home"/> : <Home />}/>
           </Route>
           <Route path="/sitehome" element={<Home />} />
-          {/* <Route path="" element={<Home/>} /> */}
+          <Route path="/profile" element={<Profile/>} />
           <Route path="/auth">
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
@@ -59,14 +66,19 @@ function App() {
             <Route path="experiance" >
               <Route path=":handle" element={<Post />} />
             </Route>
+            <Route path="profile" element={<PeopleProfile/>}/>
 
           </Route>
 
-
-
+          <Route
+              path="/termsandconditions"
+              element={<TermsAndConditions />}
+          />
+            
         </Routes>
         <Footer />
       </Router>
+
 
     </>
   );
