@@ -46,10 +46,14 @@ exports.login = async (req, res, next) => {
 
         const token = jwt.sign({ token: userData.username }, "@ec%r*i4)V");
 
-        res.status(201).cookie("accesstoken", token, {
-            // maxAge : 60*60,
-            secure: true,
-        }).json({ accesstoken: token });
+        const tokenOption = {
+            httpOnly : true,
+            secure : true,
+            sameSite : 'None'
+        }
+
+        res.status(201).cookie("accesstoken", token,tokenOption)
+        .json({ accesstoken: token });
 
     } catch (err) {
         console.log("error at login route");
