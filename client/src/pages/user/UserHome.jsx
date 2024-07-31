@@ -11,7 +11,6 @@ import Carousel from '../../components/Carousel';
 
 
 
-
 const UserHome = () => {
 
   const [journeyData, setJourneyData] = useState([]);
@@ -49,7 +48,7 @@ const UserHome = () => {
 
   }, []);
 
-  console.log(journeyData);
+  // console.log(journeyData);
 
   let cardComponents = journeyData.map((data) => {
     return <Cards key={data?.userPost?._id} userPost={data?.userPost}>
@@ -60,26 +59,30 @@ const UserHome = () => {
 
   return (
     <>
-
+      <div className={`${usercss.bgimage}  bg-cover bg-center h-fit `}>
 
       <StyledEngineProvider injectFirst>
-        <Typography variant="h2" className={usercss.heading}>
+        <Typography 
+        variant="h2"
+         className={`${usercss.heading} pt-10 font-serif  font-extrabold  bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500`}
+        >
           Save your Memories
         </Typography>
 
 
         <Box component="div" className={usercss.btn}>
-          <Link to="/user/myjourney"><Button variant="contained" className={usercss.save}>ADD JOURNEY</Button></Link>
+          <Link to="/user/myjourney">
+          <Button variant="contained" className={`${usercss.save} bg-gradient-to-tl from-[rgba(40,108,211,0.85)] to-[rgba(48,212,62,0.85)]`}>ADD JOURNEY</Button></Link>
         </Box>
 
 
 
-        <Typography variant="h4" className=' text-center'>
+        <Typography variant="h4" className=' text-center font-bold mb-1 font-serif bg-clip-text text-transparent  bg-gradient-to-tl from-[rgba(176,28,221,0.85)] to-[rgb(43,230,80)]'>
           My travels
         </Typography>
         <Box
           component="div"
-          className={`bg-black py-4`}
+          className={`bg-gradient-to-tr from-[rgba(0,0,0,0.45)] to-[rgba(255,255,255,0.63)] py-4`}
 
         >
 
@@ -87,9 +90,11 @@ const UserHome = () => {
         </Box>
 
         <Box component="div" className={usercss.btn}>
-          <Link to="/people/experiances"><Button variant="contained" className={usercss.view}> View other Expreinces</Button></Link>
+          <Link to="/people/experiances"><Button variant="contained" className={`${usercss.view} bg-gradient-to-b from-[rgba(31,216,62,0.85)] to-[rgb(85,63,3)]`}> View other Expreinces</Button></Link>
         </Box>
       </StyledEngineProvider>
+      </div>
+
     </>
   )
 }

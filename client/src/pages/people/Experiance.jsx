@@ -79,7 +79,7 @@ const Expreince = () => {
          <Box component= "div" sx = {{display : "flex", flexDirection : "column", alignItems : "center" }}>
             {postList.posts?.map((post)=><PostList key={post?.images[0]?.imageId} post = {post}/>)}
          </Box>
-          {postList.lastPost && <span>LastPost reached</span>}
+          {postList.lastPost && <></>}
     
       
     </>

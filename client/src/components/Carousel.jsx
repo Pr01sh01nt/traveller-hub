@@ -7,8 +7,9 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 const Carousel = ({ cardComponents }) => {
     let length = cardComponents.length;
 
-    console.log(cardComponents)
-    const [indexes, setIndexes] = useState({ prev: (length - 1), curr: 0, next: 1 });
+    // console.log(cardComponents);
+
+    const [indexes, setIndexes] = useState({ prev: 0, curr: 1, next: 2 });
 
     const handlePrevClick = () => {
         let index = indexes.curr - 1;
@@ -39,9 +40,9 @@ const Carousel = ({ cardComponents }) => {
 
                         <Button
                             sx={{ minWidth: 0, lm: 0, rm: 0 }}
-                            variant="contained"
+                            variant="default"
                             onClick={handlePrevClick}
-                            className='bg-transparent'
+                            className='bg-transparent active:bg-slate-300'
                         >
 
                             <ArrowBackIosNewIcon 
@@ -52,7 +53,7 @@ const Carousel = ({ cardComponents }) => {
 
 
 
-                        <div className=' relative ml-[20px] mr-[20px]  h-fit w-[20vw] bg-white rounded-xl'>
+                        <div className=' relative ml-[20px] mr-[20px]  h-fit w-[20vw] bg-white rounded-xl max-md:hidden'>
 
                             {cardComponents[indexes.prev]}
                         </div>
@@ -65,7 +66,7 @@ const Carousel = ({ cardComponents }) => {
 
 
 
-                        <div className=' relative ml-[20px] mr-[20px]  h-fit w-[20vw] bg-white rounded-xl'>
+                        <div className=' relative ml-[20px] mr-[20px]  h-fit w-[20vw] bg-white rounded-xl max-md:hidden'>
 
                             {cardComponents[indexes.next]}
                         </div>
@@ -74,9 +75,9 @@ const Carousel = ({ cardComponents }) => {
 
                         <Button
                             sx={{ minWidth: 0, lm: 0, rm: 0 }}
-                            variant="contained"
+                            variant="default"
                             onClick={handleNextClick}
-                            className=' bg-transparent'
+                            className='bg-transparent active:bg-slate-300'
                         >
                             <ArrowForwardIosIcon 
                                  fontSize='large'

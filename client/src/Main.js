@@ -16,7 +16,8 @@ const Main = () => {
         }).then(data => {
           console.log(data, "user data");
           setUser(data.data.user);
-        });
+        })
+        .catch(err=>console.log(err));
 
     },[]);
     

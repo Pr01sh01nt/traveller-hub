@@ -42,10 +42,12 @@ const Post = () => {
 
   return (
     <>
+    <div className=' min-h-screen flex justify-center items-center'>
+
       <StyledEngineProvider injectFirst>
 
         <div
-          className='flex flex-col justify-between items-center'
+          className='flex flex-col justify-between items-center '
         >
 
           <Box
@@ -105,6 +107,7 @@ const Post = () => {
         </div>
 
       </StyledEngineProvider>
+    </div>
     </>
   )
 }

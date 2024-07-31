@@ -1,3 +1,7 @@
+.bgimage{
+    background-image: url('../../assets/images/roadai.jpeg');
+}
+
 .heading{
     text-align: center;
 }
@@ -5,7 +9,7 @@
 .btn{
     display: flex;
     justify-content: center;
-    min-height: 50vh;
+    min-height: 30vh;
     align-items: center;
 }
 

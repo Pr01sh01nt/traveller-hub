@@ -15,7 +15,7 @@ const PostList = ({ post }) => {
   const navigate = useNavigate();
   const image = cldImage.image(post.images[0].imageId);
 
-  // console.log(post, "check me");
+  console.log(post, "check me");
   const handleClick = () => {
 
     return navigate(`/people/experiance/${post.placeOfJourney}`, {
@@ -33,54 +33,69 @@ const PostList = ({ post }) => {
         component="div"
         sx={cssParent}
         onClick={handleClick}
-        className={`${post?.images[0]?.imageId} rounded-xl`}
-        
+        className={`${post?.images[0]?.imageId} rounded-xl border  bg-gradient-to-tl from-[rgba(176,28,221,0.85)] to-[rgb(43,230,80)]  shadow-custom-xl shadow-[rgb(255,194,124)]` }
+
       >
 
-        {/* <Box component="div" sx={imageContainer}> */}
-        <AdvancedImage alt="data" cldImg={image} style={imageStyle} />
-        {/* </Box> */}
+      
+        {/* <AdvancedImage alt="data" cldImg={image} style={imageStyle} /> */}
+        <img src={post?.images[0]?.imageURL} className='w-[40%] max-h-[300px]' />
+ 
 
-        <Box component="div" sx={contentStyle}>
-          <Box component="div" sx={placeStyle}>
+        <Box
+          component="div"
+          sx={contentStyle}
+        >
+          <Box
+            component="div"
+            sx={placeStyle}
+          >
 
-            <Typography variant="h5">PLACE  :</Typography>
-            <Typography variant="body1">
+            <Typography variant="p" className='font-sans'>Travel to  :</Typography>
+            <Typography variant="p" className='font-hand font-extrabold text-2xl'  >
               {post.placeOfJourney}
 
             </Typography>
           </Box>
-          <Box component="div" sx={experianceStyle}>
-            <Typography variant="h5">
+          <Box
+            component="div"
+            sx={experianceStyle}
+          >
+            {/* <Typography variant="h5">
               EXPERIANCE :
-            </Typography>
+            </Typography> */}
 
-            <Typography variant="body1">
+            <Typography variant="p" className='font-hand font-bold text-xl'>
               {post.description.substr(0, 150)}
-
             </Typography>
           </Box>
 
-          <Box component="div" sx={userStyle}>
-            <Typography variant="h5">
-              USER  :
+          <Box
+            component="div"
+            sx={userStyle}
+          >
+            <Typography variant="body2">
+              Post By  :
             </Typography>
             <Typography variant="body1">
 
               {post.userId}
             </Typography>
-            
+
           </Box>
 
-          <Box component="div" sx={userStyle}>
+          <Box
+            component="div"
+            sx={userStyle}
+          >
             <Typography
               variant='body1'
               className='text-right'
             >
-              {post.createdAt.substr(0,10)}
+              {post.createdAt.substr(0, 10)}
 
             </Typography>
-           
+
           </Box>
 
 
@@ -98,13 +113,15 @@ const cssParent = {
 
   display: "flex",
 
-  border: 'black solid 2px',
+  // border: 'black solid 2px',
   height: 'fit-content',
   margin: '2em 2em',
-  width: "75vw",
-  maxHeight: "45vh",
+  width: "75vw" , 
+  // minWidth: "fit-content",
+
+  // maxHeight: "50vh",
   overflow: "hidden",
-  boxShadow: "2px 2px 4px blue",
+  // boxShadow: "2px 2px 4px ",
   cursor: "pointer",
   // p : "2px"
 
@@ -134,7 +151,7 @@ const placeStyle = {
   height: 'fit-content',
   mb: 1,
   // fontSize : "1.5em",
-  // maxWidth : "99%",
+  maxWidth : 'fit-content',
   // maxHeight: "10vh",
 }
 
@@ -146,7 +163,7 @@ const experianceStyle = {
   height: 'fit-content',
   mb: 1,
   // fontSize : "1.5em",
-  // maxWidth : "99%",
+  // maxWidth : "9%",
   maxHeight: "40%",
 
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
 import logcss from './Auth.module.css'
 import axios from 'axios'
@@ -7,11 +7,13 @@ import { useCookies } from 'react-cookie'
 import {Box, Button, TextField} from '@mui/material' 
 import { StyledEngineProvider } from '@mui/material/styles';
 import toast from 'react-hot-toast';
+import { MyContext } from '../../context/MyContext'
 
 export const Login = () => {
   const [userData, setData] = useState({});
   // const [_, setCookie] = useCookies(["accesstoken"]);
   const navigate = useNavigate();
+  const { hasLogin } = useContext(MyContext);
 
   // console.log(userData, "from login");
 
@@ -50,7 +52,7 @@ export const Login = () => {
     
     <StyledEngineProvider injectFirst>
     <Box component="div" className={`${logcss.form} ${logcss.loginForm}`}> 
-        
+      
         <Box component= "form" onSubmit={handleSubmit}>
           <Box component= "fieldset" className={`${logcss.fieldset} ${logcss.loginField}`}>
             <Box component="div" className={logcss.content}>
@@ -72,7 +74,14 @@ export const Login = () => {
       </Box>
       </StyledEngineProvider>
 
-    
+
     </>
   )
+  // : navigate("/user/home")
 }
+
+
+
+
+
+

@@ -57,7 +57,7 @@ const Footer = () => {
               color="white"
               component="p"
             >
-              © {new Date().getFullYear()} Innovators Hub. All rights reserved.
+              © {new Date().getFullYear()} Travels Hub. All rights reserved.
             </Typography>
           </Grid>
         </Grid>

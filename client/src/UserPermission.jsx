@@ -33,6 +33,7 @@ export const UserPermission = ({pathValue}) => {
                 setHasLogin(2);
                 console.log('hi');
                 console.log(e);
+                // alert(e)
               
             }
         }
