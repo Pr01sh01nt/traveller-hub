@@ -21,6 +21,7 @@ import TermsAndConditions from './pages/TermsAndConditions';
 import toast, { Toaster } from 'react-hot-toast';
 import PeopleProfile from './pages/people/Profile';
 
+import Loading from './components/Loading';
 
 function App() {
   const [test, setTest] = useState(0);

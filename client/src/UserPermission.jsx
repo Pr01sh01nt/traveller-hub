@@ -3,6 +3,7 @@ import { Outlet,  useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { MyContext } from './context/MyContext';
 import Home from './pages/Home';
+import Loading from './components/Loading';
 
 export const UserPermission = ({pathValue}) => {
     // const [hasLogin, setHasLogin] = useState(0);
@@ -11,7 +12,7 @@ export const UserPermission = ({pathValue}) => {
     const {hasLogin, setHasLogin} = useContext(MyContext);
     // console.log(location.pathname);
 
-    console.log(hasLogin, "hasLogin rendered from userPermission");
+    console.log(hasLogin, "hasLogin rendered from userPermission", pathValue);
     useEffect(() => {
             console.log("userpermissoin");
         const check = async () => {
@@ -46,7 +47,7 @@ export const UserPermission = ({pathValue}) => {
         <>
 
             {/* {hasLogin!==0 ? (hasLogin === 1 ? <>{console.log("child rendered")}<Outlet/></> : (<>{navigate("/", {replace : true})}<Home /></>)) : <h1>Loading.......</h1>} */}
-            {hasLogin!==0 ? (hasLogin === 1 ? <><Outlet/></> : <NotLogin/> ) : <h1>Loading.......</h1>}
+            {hasLogin!==0 ? (hasLogin === 1 ? <><Outlet/></> : <NotLogin/> ) : <><Loading/></>}
         </>
 
 
